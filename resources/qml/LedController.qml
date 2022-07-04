@@ -32,7 +32,7 @@ Column {
                     for(var channelIndex in channels.model) {
                         if (channels.itemAt(channelIndex) == null)
                             return
-                        var channelValue = Math.floor(255 * channels.itemAt(channelIndex).value)
+                        var channelValue = Math.floor(channels.itemAt(channelIndex).value)
                         var valueHex = channelValue.toString(16).padStart(2, "0")
                         groupHex += valueHex
                     }
@@ -59,7 +59,7 @@ Column {
                 for(var channelIndex in channels.model) {
                     if (channels.itemAt(channelIndex) == null)
                         return
-                    channels.itemAt(channelIndex).value = parseInt(channelValues.substr(2*channelIndex, 2), 16)/255
+                    channels.itemAt(channelIndex).value = parseInt(channelValues.substr(2*channelIndex, 2), 16)
                 }
             }
             inhibitPublish = false
@@ -154,6 +154,8 @@ Column {
                             PB.Slider {
                                 id: slider
                                 orientation: Qt.Vertical
+                                from: 0
+                                to: 255
                                 enabled: power.checked
                                 value: channelRepeater.values[modelData]
                                 onValueChanged: function() {
