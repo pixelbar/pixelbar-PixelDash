@@ -22,6 +22,8 @@ ApplicationWindow {
     Row {
         spacing: 20
 
+        id: lorem
+
         anchors.top: header.bottom
         anchors.topMargin: 50
 
@@ -69,4 +71,17 @@ ApplicationWindow {
             }
         }
     }
+
+    SensorBlock {
+        id: ipsum
+
+        anchors.top: lorem.bottom
+        anchors.topMargin: 50
+
+        sensor: (app != null) ? app.sensors.Weather : null
+        name: "Weather"
+
+        Layout.alignment: Qt.AlignTop
+    }
+
 }
