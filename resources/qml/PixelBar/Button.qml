@@ -17,7 +17,7 @@ Button {
         }
     }
 
-    contentItem: Text {
+    contentItem: Label {
         text: control.text
         font.family: "Arial"
         font.pointSize: control.fontSize

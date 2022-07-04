@@ -20,14 +20,16 @@ ApplicationWindow {
     }
 
     GridLayout {
-        columnSpacing: 100
+        columnSpacing: 75
         rowSpacing: 75
         columns: 3
 
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.top: header.bottom
-        anchors.topMargin: 50
+        anchors.margins: 25
 
-        LedController {
+        LightsController {
             Layout.columnSpan: 2
             Layout.rowSpan: 2
         }

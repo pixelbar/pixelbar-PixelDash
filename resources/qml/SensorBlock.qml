@@ -29,6 +29,7 @@ Column {
     PB.Label
     {
         text: name
+        visible: text != ""
     }
 
     Repeater {
