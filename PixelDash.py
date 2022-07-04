@@ -8,6 +8,7 @@ from PySide2.QtCore import Qt, QObject, Property
 
 from SensorManager import SensorManager
 
+
 class PixelDash(QObject):
     def __init__(self):
         QObject.__init__(self)
@@ -21,10 +22,12 @@ class PixelDash(QObject):
         if not self._sensorManager:
             self._sensorManager = SensorManager()
         return self._sensorManager
+
     sensors = Property(QObject, fget=sensors, constant=True)
 
     def test(self) -> str:
         return "hello world!"
+
     test = Property(str, fget=test, constant=True)
 
 
@@ -37,13 +40,13 @@ if __name__ == "__main__":
 
     # Hide the cursor
     if False:
-        app.setOverrideCursor(Qt.CursorShape.BlankCursor);
+        app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
     pixelDash = PixelDash()
 
     # Create QML engine
     engine = QQmlApplicationEngine()
-    context = QQmlContext(engine.rootContext()) #type: ignore #MyPy doens't realise that engine can't be None here.
+    context = QQmlContext(engine.rootContext())
 
     engine.rootContext().setContextProperty("app", pixelDash)
     engine.load(os.path.join("resources", "qml", "PixelDash.qml"))

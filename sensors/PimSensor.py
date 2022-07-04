@@ -2,6 +2,7 @@ from .RESTSensor import RESTSensor
 
 import requests
 
+
 class PimSensor(RESTSensor):
     def __init__(self):
         super().__init__()
@@ -25,12 +26,9 @@ class PimSensor(RESTSensor):
 
         """
 
-
     def processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()
-        values = {
-            "Temperature": float(response_json["AccelTemp"])
-        }
+        values = {"Temperature": float(response_json["AccelTemp"])}
 
         self._state = response.status_code
         self._values = values

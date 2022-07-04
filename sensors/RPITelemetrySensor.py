@@ -4,6 +4,7 @@ import psutil
 import re
 import subprocess
 
+
 class RPITelemetrySensor(CommandLineSensor):
     def __init__(self):
         super().__init__()
@@ -20,16 +21,15 @@ class RPITelemetrySensor(CommandLineSensor):
 
         """
 
-
     def processResponse(self, response: subprocess.Popen) -> dict:
         values = {
             "CPU usage": psutil.cpu_percent(interval=0.25),
-            "Memory usage": psutil.virtual_memory().percent
+            "Memory usage": psutil.virtual_memory().percent,
         }
 
         result = self._re.search(response.stdout.read())
         if result:
-            values["Temperature"] =  float(matches[0])
+            values["Temperature"] = float(matches[0])
         else:
             values["Temperature"] = None
 

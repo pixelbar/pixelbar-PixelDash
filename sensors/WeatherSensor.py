@@ -2,6 +2,7 @@ from .RESTSensor import RESTSensor
 
 import requests
 
+
 class WeatherSensor(RESTSensor):
     def __init__(self):
         super().__init__()
@@ -66,7 +67,6 @@ class WeatherSensor(RESTSensor):
         }
 
         """
-
 
     def processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()

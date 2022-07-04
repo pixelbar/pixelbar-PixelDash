@@ -3,6 +3,7 @@ import time
 
 from PySide2.QtCore import QObject, Signal, Property
 
+
 class Sensor(QObject):
     def __init__(self) -> None:
         super().__init__()
@@ -46,18 +47,23 @@ class Sensor(QObject):
         self.dataChanged.emit()
 
     dataChanged = Signal()
+
     def state(self) -> int:
         return self._state
+
     state = Property(int, fget=state, notify=dataChanged)
 
     def timestamp(self) -> float:
         return self._timestamp
+
     timestamp = Property(float, fget=timestamp, notify=dataChanged)
 
     def values(self) -> dict:
         return self._values
+
     values = Property("QVariantMap", fget=values, notify=dataChanged)
 
     def name(self) -> str:
         return self._name
+
     name = Property(str, fget=name, constant=True)

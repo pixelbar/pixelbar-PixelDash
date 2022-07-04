@@ -7,6 +7,7 @@ from sensors.RPITelemetrySensor import RPITelemetrySensor
 
 from PySide2.QtCore import QObject, Property
 
+
 class SensorManager(QObject):
     def __init__(self):
         QObject.__init__(self)
@@ -30,6 +31,7 @@ class SensorManager(QObject):
             self._spaceStateSensor = SpaceStateSensor()
             self._spaceStateSensor.start()
         return self._spaceStateSensor
+
     SpaceState = Property(QObject, fget=SpaceState, constant=True)
 
     def Weather(self) -> WeatherSensor:
@@ -37,6 +39,7 @@ class SensorManager(QObject):
             self._weatherSensor = WeatherSensor()
             self._weatherSensor.start()
         return self._weatherSensor
+
     Weather = Property(QObject, fget=Weather, constant=True)
 
     def IKEA(self) -> IKEASensor:
@@ -44,6 +47,7 @@ class SensorManager(QObject):
             self._ikeaSensor = IKEASensor()
             self._ikeaSensor.start()
         return self._ikeaSensor
+
     IKEA = Property(QObject, fget=IKEA, constant=True)
 
     def Jim(self) -> JimSensor:
@@ -51,6 +55,7 @@ class SensorManager(QObject):
             self._jimSensor = JimSensor()
             self._jimSensor.start()
         return self._jimSensor
+
     Jim = Property(QObject, fget=Jim, constant=True)
 
     def Pim(self) -> PimSensor:
@@ -58,6 +63,7 @@ class SensorManager(QObject):
             self._pimSensor = PimSensor()
             self._pimSensor.start()
         return self._pimSensor
+
     Pim = Property(QObject, fget=Pim, constant=True)
 
     def RPI(self) -> RPITelemetrySensor:
@@ -65,4 +71,5 @@ class SensorManager(QObject):
             self._rpiSensor = RPITelemetrySensor()
             self._rpiSensor.start()
         return self._rpiSensor
+
     RPI = Property(QObject, fget=RPI, constant=True)

@@ -2,6 +2,7 @@ import requests
 
 from .Sensor import Sensor
 
+
 class RESTSensor(Sensor):
     def __init__(self) -> None:
         super().__init__()

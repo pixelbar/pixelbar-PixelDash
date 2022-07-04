@@ -2,6 +2,7 @@ from .RESTSensor import RESTSensor
 
 import requests
 
+
 class IKEASensor(RESTSensor):
     def __init__(self):
         super().__init__()
@@ -40,7 +41,6 @@ class IKEASensor(RESTSensor):
         BME680 Gas resistance   76.18 kΩ
         VINDRIKTNING PM 2.5 µm  7 µg/m³
         """
-
 
     def processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()

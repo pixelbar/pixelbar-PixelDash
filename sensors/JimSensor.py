@@ -3,6 +3,7 @@ from .RESTSensor import RESTSensor
 import requests
 import re
 
+
 class JimSensor(RESTSensor):
     def __init__(self):
         super().__init__()
@@ -21,12 +22,11 @@ class JimSensor(RESTSensor):
 
         """
 
-
     def processResponse(self, response: requests.Response) -> dict:
         values = {}
         result = self._re.search(response.text)
         if result:
-            values["Temperature"] =  float(matches[0])
+            values["Temperature"] = float(matches[0])
         else:
             values["Temperature"] = None
 
