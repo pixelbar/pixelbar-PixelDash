@@ -1,7 +1,7 @@
 import threading
 import time
 
-from PyQt6.QtCore import QObject, pyqtSignal, pyqtProperty
+from PySide2.QtCore import QObject, Signal, Property
 
 class Sensor(QObject):
     def __init__(self) -> None:
@@ -45,19 +45,19 @@ class Sensor(QObject):
         self._timestamp = time.monotonic()
         self.dataChanged.emit()
 
-    dataChanged = pyqtSignal()
-    @pyqtProperty(int, notify=dataChanged)
+    dataChanged = Signal()
     def state(self) -> int:
         return self._state
+    state = Property(int, fget=state, notify=dataChanged)
 
-    @pyqtProperty(float, notify=dataChanged)
     def timestamp(self) -> float:
         return self._timestamp
+    timestamp = Property(float, fget=timestamp, notify=dataChanged)
 
-    @pyqtProperty("QVariantMap", notify=dataChanged)
     def values(self) -> dict:
         return self._values
+    values = Property("QVariantMap", fget=values, notify=dataChanged)
 
-    @pyqtProperty(str, constant=True)
     def name(self) -> str:
         return self._name
+    name = Property(str, fget=name, constant=True)

@@ -2,9 +2,9 @@ import sys
 import os
 import signal
 
-from PyQt6.QtGui import QGuiApplication
-from PyQt6.QtQml import QQmlApplicationEngine, QQmlContext
-from PyQt6.QtCore import Qt, QObject, pyqtProperty
+from PySide2.QtGui import QGuiApplication
+from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
+from PySide2.QtCore import Qt, QObject, Property
 
 from SensorManager import SensorManager
 
@@ -17,15 +17,15 @@ class PixelDash(QObject):
         if self._sensorManager:
             self._sensorManager.stop()
 
-    @pyqtProperty(QObject, constant=True)
     def sensors(self) -> SensorManager:
         if not self._sensorManager:
             self._sensorManager = SensorManager()
         return self._sensorManager
+    sensors = Property(QObject, fget=sensors, constant=True)
 
-    @pyqtProperty(str, constant=True)
     def test(self) -> str:
         return "hello world!"
+    test = Property(str, fget=test, constant=True)
 
 
 if __name__ == "__main__":
@@ -52,6 +52,6 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     engine.quit.connect(app.quit)
 
-    result = app.exec()
+    result = app.exec_()
     pixelDash.stop()
     sys.exit(result)

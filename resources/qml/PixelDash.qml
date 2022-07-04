@@ -1,6 +1,6 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts  1.15
 
 import "PixelBar" as PB
 
@@ -29,11 +29,19 @@ ApplicationWindow {
 
         LedController {
             Layout.columnSpan: 2
+            Layout.rowSpan: 2
         }
 
         SensorBlock {
             sensor: (app != null) ? app.sensors.Weather : null
             name: "Weather"
+
+            Layout.alignment: Qt.AlignTop
+        }
+
+        SensorBlock {
+            sensor: (app != null) ? app.sensors.IKEA : null
+            name: "IKEA"
 
             Layout.alignment: Qt.AlignTop
         }
