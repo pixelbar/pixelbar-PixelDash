@@ -33,7 +33,6 @@ ApplicationWindow {
         }
 
         DoorController {
-
         }
 
         SensorBlock {
@@ -47,15 +46,10 @@ ApplicationWindow {
 
             PB.Button {
                 text: "Test"
-                onClicked: checked = !checked
+                checkable: true
                 autoResetInterval: 2000
             }
-
-            PB.Label {
-                text: (app != null) ? app.test : ""
-            }
         }
-
 
         Row {
             spacing: 10

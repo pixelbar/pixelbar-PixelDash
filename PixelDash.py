@@ -25,11 +25,6 @@ class PixelDash(QObject):
 
     sensors = Property(QObject, fget=sensors, constant=True)
 
-    def test(self) -> str:
-        return "hello world!"
-
-    test = Property(str, fget=test, constant=True)
-
 
 if __name__ == "__main__":
     # Unify default control looks across platforms
