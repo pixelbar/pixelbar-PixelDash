@@ -19,69 +19,78 @@ ApplicationWindow {
         id: header
     }
 
-    Row {
-        spacing: 20
-
-        id: lorem
+    GridLayout {
+        columnSpacing: 100
+        rowSpacing: 100
+        columns: 3
 
         anchors.top: header.bottom
         anchors.topMargin: 50
 
-        PB.Button {
-            text: "Test"
-            onClicked: checked = !checked
-            autoResetInterval: 2000
+        LedController {
+            Layout.columnSpan: 2
         }
 
-        PB.Label {
-            text: (app != null) ? app.test : ""
+        SensorBlock {
+            sensor: (app != null) ? app.sensors.Weather : null
+            name: "Weather"
+
+            Layout.alignment: Qt.AlignTop
         }
 
-        PB.Slider {
-            id: slider
-            orientation: Qt.Horizontal
-        }
+        Row {
+            spacing: 20
 
-        PB.Label {
-            id: value
-            text: slider.value.toFixed(2)
-            onTextChanged: function(text) {
-                graph.addValue(parseFloat(text))
+            PB.Button {
+                text: "Test"
+                onClicked: checked = !checked
+                autoResetInterval: 2000
+            }
+
+            PB.Label {
+                text: (app != null) ? app.test : ""
             }
         }
 
-        PB.SparkLine {
-            id: graph
-        }
 
-        Item {
-            width: childrenRect.width
-            height: parent.height
-            PB.Label {
-                text: graph.max.toFixed(2)
-                color: "green"
-                font.pointSize: 20
-                anchors.top: parent.top
+        Row {
+            spacing: 10
+
+            PB.Slider {
+                id: slider
+                orientation: Qt.Horizontal
+                anchors.verticalCenter: graph.verticalCenter
             }
+
             PB.Label {
-                text: graph.min.toFixed(2)
-                color: "green"
-                font.pointSize: 20
-                anchors.bottom: parent.bottom
+                id: value
+                text: slider.value.toFixed(2)
+                anchors.verticalCenter: graph.verticalCenter
+                onTextChanged: function(text) {
+                    graph.addValue(parseFloat(text))
+                }
+            }
+
+            PB.SparkLine {
+                id: graph
+            }
+
+            Item {
+                width: childrenRect.width
+                height: parent.height
+                PB.Label {
+                    text: graph.max.toFixed(2)
+                    color: "green"
+                    font.pointSize: 20
+                    anchors.top: parent.top
+                }
+                PB.Label {
+                    text: graph.min.toFixed(2)
+                    color: "green"
+                    font.pointSize: 20
+                    anchors.bottom: parent.bottom
+                }
             }
         }
     }
-
-    SensorBlock {
-        id: ipsum
-
-        anchors.top: lorem.bottom
-        anchors.topMargin: 50
-
-        sensor: (app != null) ? app.sensors.Weather : null
-        name: "Weather"
-
-        Layout.alignment: Qt.AlignTop
-    }
-
 }
