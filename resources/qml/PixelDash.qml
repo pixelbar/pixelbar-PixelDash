@@ -37,6 +37,30 @@ ApplicationWindow {
         PB.Label {
             id: value
             text: slider.value.toFixed(2)
+            onTextChanged: function(text) {
+                graph.addValue(parseFloat(text))
+            }
+        }
+
+        PB.SparkLine {
+            id: graph
+        }
+
+        Item {
+            width: childrenRect.width
+            height: parent.height
+            PB.Label {
+                text: graph.max.toFixed(2)
+                color: "green"
+                font.pointSize: 20
+                anchors.top: parent.top
+            }
+            PB.Label {
+                text: graph.min.toFixed(2)
+                color: "green"
+                font.pointSize: 20
+                anchors.bottom: parent.bottom
+            }
         }
     }
 }
