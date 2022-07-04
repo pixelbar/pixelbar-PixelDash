@@ -6,9 +6,22 @@ from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine, QQmlContext
 from PyQt6.QtCore import Qt, QObject, pyqtProperty
 
+from SensorManager import SensorManager
+
 class PixelDash(QObject):
     def __init__(self):
         QObject.__init__(self)
+        self._sensorManager = None
+
+    def stop(self):
+        if self._sensorManager:
+            self._sensorManager.stop()
+
+    @pyqtProperty(QObject, constant=True)
+    def sensors(self) -> SensorManager:
+        if not self._sensorManager:
+            self._sensorManager = SensorManager()
+        return self._sensorManager
 
     @pyqtProperty(str, constant=True)
     def test(self) -> str:
@@ -40,4 +53,5 @@ if __name__ == "__main__":
     engine.quit.connect(app.quit)
 
     result = app.exec()
+    pixelDash.stop()
     sys.exit(result)

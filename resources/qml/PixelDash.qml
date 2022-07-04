@@ -15,9 +15,15 @@ ApplicationWindow {
         color: "black"
     }
 
+    Header {
+        id: header
+    }
 
     Row {
         spacing: 20
+
+        anchors.top: header.bottom
+        anchors.topMargin: 50
 
         PB.Button {
             text: "Test"
