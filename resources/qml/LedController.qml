@@ -120,14 +120,14 @@ Column {
                         anchors.left: parent.left
                         checked: true
                         text: checked ? "On" : "Off"
-                        onClicked: checked = !checked
+                        checkable: true
                         width: (parent.width - 10) / 2
                     }
                     PB.Button {
                         id: link
                         anchors.right: parent.right
                         text: "Link"
-                        onClicked: checked = !checked
+                        checkable: true
                         width: (parent.width - 10) / 2
                     }
                 }
@@ -253,18 +253,18 @@ Column {
                 onClicked: {
                     if (name=="Unicorn") {
                         randomAnimation.stop()
-                        if(!checked) {
-                            unicornAnimation.restart()
-                        } else {
+                        if(unicornAnimation.running) {
                             unicornAnimation.stop()
+                        } else {
+                            unicornAnimation.restart()
                         }
                     } else if (name=="Random") {
                         unicornAnimation.stop()
-                        if(!checked) {
+                        if(randomAnimation.running) {
+                            randomAnimation.stop()
+                        } else {
                             presetsController.setRandomColor()
                             randomAnimation.restart()
-                        } else {
-                            randomAnimation.stop()
                         }
                     } else {
                         unicornAnimation.stop()

@@ -8,7 +8,7 @@ Column {
     spacing: 15
 
     property var sensor
-    property var name
+    property var name: sensor != null ? sensor.name : ""
 
     property var items:  Array()
     property var itemValues

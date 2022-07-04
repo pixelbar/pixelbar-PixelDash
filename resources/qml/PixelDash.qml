@@ -21,7 +21,7 @@ ApplicationWindow {
 
     GridLayout {
         columnSpacing: 100
-        rowSpacing: 100
+        rowSpacing: 75
         columns: 3
 
         anchors.top: header.bottom
@@ -32,16 +32,12 @@ ApplicationWindow {
             Layout.rowSpan: 2
         }
 
-        SensorBlock {
-            sensor: (app != null) ? app.sensors.Weather : null
-            name: "Weather"
+        DoorController {
 
-            Layout.alignment: Qt.AlignTop
         }
 
         SensorBlock {
-            sensor: (app != null) ? app.sensors.IKEA : null
-            name: "IKEA"
+            sensor: (app != null) ? app.sensors.Weather : null
 
             Layout.alignment: Qt.AlignTop
         }

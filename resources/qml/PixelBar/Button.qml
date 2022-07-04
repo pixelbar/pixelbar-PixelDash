@@ -10,7 +10,7 @@ Button {
     onCheckedChanged: {
         if (control.autoResetInterval > 0) {
             if (control.checked) {
-                autoResetTimer.start()
+                autoResetTimer.restart()
             } else {
                 autoResetTimer.stop()
             }
@@ -60,6 +60,8 @@ Button {
         repeat: false
         interval: control.autoResetInterval
 
-        onTriggered: control.checked = false
+        onTriggered: {
+            control.checked = false
+        }
     }
 }
