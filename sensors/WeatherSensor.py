@@ -75,7 +75,7 @@ class WeatherSensor(RESTSensor):
             "Cloud": response_json["current"]["cloud"],
             "Precipitation": response_json["current"]["precip_mm"],
             "Wind": response_json["current"]["wind_kph"],
-            "PM2.5": response_json["current"]["air_quality"]["pm2_5"],
+            "PM2.5": round(response_json["current"]["air_quality"]["pm2_5"], 2)
         }
 
         self._state = response.status_code
