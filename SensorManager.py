@@ -26,6 +26,14 @@ class SensorManager(QObject):
         if self._ikeaSensor:
             self._ikeaSensor.stop()
 
+        if self._jimSensor:
+            self._jimSensor.stop()
+        if self._pimSensor:
+            self._pimSensor.stop()
+        if self._rpiSensor:
+            self._rpiSensor.stop()
+
+
     def SpaceState(self) -> SpaceStateSensor:
         if not self._spaceStateSensor:
             self._spaceStateSensor = SpaceStateSensor()
