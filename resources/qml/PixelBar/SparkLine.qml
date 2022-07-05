@@ -17,17 +17,19 @@ Canvas {
     property real min: calculatedMin
     property real max: calculatedMax
 
+    property int validValues: 0
+
     onPaint: {
         var ctx = getContext("2d");
         ctx.clearRect(0, 0, control.width, control.height);
-        ctx.strokeStyle = control.strokeColor
+        ctx.strokeStyle = control.strokeColor;
 
         var x_range = control.data.length;
 
-        if(x_range == 0)
+        if(x_range == 0 || control.validValues == 0)
             return;
 
-        var y_range = max - min;
+        var y_range = control.max - control.min;
 
         if(x_range == 1 || y_range == 0) {
             var y_pos = control.height / 2;
@@ -42,16 +44,31 @@ Canvas {
         var x_pos = 0;
         var y_pos = yPos(control.data[0]);
 
-        ctx.beginPath(x_pos, y_pos);
+        var pathBegun = false
         for(var d in control.data) {
-            y_pos = yPos(control.data[d]);
-            x_pos = (d / (x_range-1)) * control.width
-            ctx.lineTo(x_pos, y_pos);
+            var value = control.data[d];
+            if(value != undefined) {
+                if(!pathBegun) {
+                    ctx.beginPath(x_pos, y_pos);
+                    pathBegun = true;
+                }
+
+                y_pos = yPos(value);
+                x_pos = (d / (x_range-1)) * control.width;
+                ctx.lineTo(x_pos, y_pos);
+            } else {
+                if(pathBegun) {
+                    ctx.stroke();
+                    pathBegun = false;
+                }
+            }
         }
-        ctx.stroke();
+        if(pathBegun) {
+            ctx.stroke();
+        }
 
         function yPos(value) {
-            return (1 - ((value - min) / y_range)) * control.height;
+            return (1 - ((value - control.min) / y_range)) * control.height;
         }
     }
 
@@ -65,31 +82,34 @@ Canvas {
     }
 
     function analyzeData() {
-        var analyzed = minMaxSum(control.data)
+        var analyzed = minMaxSum(control.data);
+        control.validValues = analyzed.values;
         if (analyzed.values > 0) {
-            average = analyzed.sum / analyzed.values
-            calculatedMin = analyzed.min
-            calculatedMax = analyzed.max
+            control.average = analyzed.sum / analyzed.values;
+            control.calculatedMin = analyzed.min;
+            control.calculatedMax = analyzed.max;
         } else {
-            average = undefined
-            calculatedMin = undefined
-            calculatedMax = undefined
+            control.average = undefined;
+            control.calculatedMin = undefined;
+            control.calculatedMax = undefined;
         }
     }
 
     function minMaxSum(items) {
         if (items.length == 0)
-            return {min:undefined, max:undefined, sum:undefined}
+            return {min:undefined, max:undefined, sum:undefined, values: 0}
         return items.reduce((acc, val) => {
             if(val == undefined) {
                 return acc;
             }
-            acc.min = ( val < acc.min ) ? val : acc.min;
-            acc.max = ( val > acc.max ) ? val : acc.max;
+            acc.min = ( val < acc.min || acc.min == undefined ) ? val : acc.min;
+            acc.max = ( val > acc.max || acc.max == undefined ) ? val : acc.max;
+            if (acc.sum == undefined)
+                acc.sum = 0;
             acc.sum += val;
             acc.values++;
 
             return acc;
-        }, {min: items[0], max: items[0], sum:0, values: 0});
+        }, {min: undefined, max: undefined, sum: undefined, values: 0});
     }
 }
