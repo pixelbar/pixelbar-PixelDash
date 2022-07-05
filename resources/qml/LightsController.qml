@@ -99,43 +99,36 @@ Column {
         Column {
             spacing: 20
 
+            function switchGroups(on) {
+                lightsController.inhibitPublish = true
+                for(var index in groupRepeater.model) {
+                    groupRepeater.itemAt(index).on = on
+                }
+                lightsController.inhibitPublish = false
+                lightsController.publishValues()
+            }
+
+            function linkGroups(linked) {
+                for(var index in groupRepeater.model) {
+                    groupRepeater.itemAt(index).linked = linked
+                }
+            }
+
             PB.Button {
                 text: "All on"
-                onClicked: {
-                    lightsController.inhibitPublish = true
-                    for(var index in groupRepeater.model) {
-                        groupRepeater.itemAt(index).on = true
-                    }
-                    lightsController.inhibitPublish = false
-                    lightsController.publishValues()
-                }
+                onClicked: parent.switchGroups(true)
             }
             PB.Button {
                 text: "All off"
-                onClicked: {
-                    lightsController.inhibitPublish = true
-                    for(var index in groupRepeater.model) {
-                        groupRepeater.itemAt(index).on = false
-                    }
-                    lightsController.inhibitPublish = false
-                    lightsController.publishValues()
-                }
+                onClicked: parent.switchGroups(false)
             }
             PB.Button {
                 text: "Link all"
-                onClicked: {
-                    for(var index in groupRepeater.model) {
-                        groupRepeater.itemAt(index).linked = true
-                    }
-                }
+                onClicked: parent.linkGroups(true)
             }
             PB.Button {
                 text: "Link none"
-                onClicked: {
-                    for(var index in groupRepeater.model) {
-                        groupRepeater.itemAt(index).linked = false
-                    }
-                }
+                onClicked: parent.linkGroups(false)
             }
         }
     }
