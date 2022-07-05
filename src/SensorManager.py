@@ -1,9 +1,9 @@
-from sensors.SpaceStateSensor import SpaceStateSensor
-from sensors.WeatherSensor import WeatherSensor
-from sensors.IKEASensor import IKEASensor
-from sensors.JimSensor import JimSensor
-from sensors.PimSensor import PimSensor
-from sensors.RPITelemetrySensor import RPITelemetrySensor
+from .sensors.SpaceStateSensor import SpaceStateSensor
+from .sensors.WeatherSensor import WeatherSensor
+from .sensors.IKEASensor import IKEASensor
+from .sensors.JimSensor import JimSensor
+from .sensors.PimSensor import PimSensor
+from .sensors.RPITelemetrySensor import RPITelemetrySensor
 
 from PySide2.QtCore import QObject, Property
 
