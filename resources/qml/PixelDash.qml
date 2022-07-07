@@ -7,7 +7,7 @@ import "PixelBar" as PB
 ApplicationWindow {
     id: window
     visible: true
-    visibility: "FullScreen"
+    //visibility: "FullScreen"
     width: 1920
     height: 1080
 
@@ -19,78 +19,38 @@ ApplicationWindow {
         id: header
     }
 
-    GridLayout {
-        columnSpacing: 75
-        rowSpacing: 75
-        columns: 3
+    LightsController {
+        id: lightsController
 
         anchors.left: parent.left
+        anchors.top: header.bottom
+        anchors.margins: 25
+    }
+
+    Column {
+        id: sideWidgets
+
+        anchors.left: lightsController.right
         anchors.right: parent.right
         anchors.top: header.bottom
         anchors.margins: 25
+        anchors.leftMargin: 75
 
-        LightsController {
-            Layout.columnSpan: 2
-            Layout.rowSpan: 2
-        }
+        spacing: 75
 
-        DoorController {
-        }
+        DoorController {}
+
+        ClimateBlock {}
 
         SensorBlock {
             sensor: (app != null) ? app.sensors.Weather : null
-
-            Layout.alignment: Qt.AlignTop
         }
+    }
 
-        Row {
-            spacing: 20
-
-            PB.Button {
-                text: "Test"
-                checkable: true
-                autoResetInterval: 2000
-            }
-        }
-
-        Row {
-            spacing: 10
-
-            PB.Slider {
-                id: slider
-                orientation: Qt.Horizontal
-                anchors.verticalCenter: graph.verticalCenter
-            }
-
-            PB.Label {
-                id: value
-                text: slider.value.toFixed(2)
-                anchors.verticalCenter: graph.verticalCenter
-                onTextChanged: function(text) {
-                    graph.addValue(parseFloat(text))
-                }
-            }
-
-            PB.SparkLine {
-                id: graph
-            }
-
-            Item {
-                width: childrenRect.width
-                height: parent.height
-                PB.Label {
-                    text: graph.max.toFixed(2)
-                    color: "green"
-                    font.pointSize: 20
-                    anchors.top: parent.top
-                }
-                PB.Label {
-                    text: graph.min.toFixed(2)
-                    color: "green"
-                    font.pointSize: 20
-                    anchors.bottom: parent.bottom
-                }
-            }
-        }
+    GraphTestBlock {
+        anchors.left: parent.left
+        anchors.top: lightsController.bottom
+        anchors.margins: 25
+        anchors.topMargin: 75
     }
 }

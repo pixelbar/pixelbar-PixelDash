@@ -54,8 +54,10 @@ Item {
     Rectangle {
         color: "darkgreen"
         height: 1
-        width: parent.width
+        width: parent.width + 2 * 25
 
+        anchors.left: parent.left
+        anchors.leftMargin: -25
         anchors.top: closeButton.bottom
         anchors.topMargin: 25
     }
