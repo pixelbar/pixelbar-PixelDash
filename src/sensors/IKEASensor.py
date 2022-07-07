@@ -8,8 +8,17 @@ class IKEASensor(RESTSensor):
         super().__init__()
         self._name = "IKEA air quality"
 
-        self._period = 30
+        self._interval = 30
         self._url = "http://172.30.31.116/cm?cmnd=STATUS%2010"
+
+        self._unitMap = {
+            "Temperature": "°C",
+            "Humidity": "%",
+            "DewPoint": "°C",
+            "Pressure": "hPa",
+            "Gas": "kΩ",
+            "PM2.5": "µg/m³"
+        }
 
         """
         Ëxample application/json response:

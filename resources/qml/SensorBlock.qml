@@ -8,7 +8,7 @@ Column {
     spacing: 15
 
     property var sensor
-    property var name: sensor != null ? sensor.name : ""
+    property var name: (sensor != null) ? sensor.name : ""
 
     property var items:  Array()
     property var itemValues
@@ -64,25 +64,34 @@ Column {
                 anchors.verticalCenter: graph.verticalCenter
                 font.pointSize: 20
                 width: 100
+                horizontalAlignment: Text.AlignRight
+            }
+
+            PB.Label {
+                id: unitLabel
+                text: (sensor != null) ? sensor.unitMap[modelData] : ""
+                font.pointSize: 20
+                width: 75
+                horizontalAlignment: Text.AlignLeft
             }
 
             PB.SparkLine {
                 id: graph
-                height: 50
+                height: nameLabel.height
             }
 
             Item {
                 width: childrenRect.width
                 height: parent.height
                 PB.Label {
-                    text: graph.max.toFixed(2)
+                    text: (graph.max != undefined) ? graph.max.toString() : ""
                     color: "green"
                     font.pointSize: 10
                     anchors.top: parent.top
                     horizontalAlignment: Text.AlignLeft
                 }
                 PB.Label {
-                    text: graph.min.toFixed(2)
+                    text: (graph.min != undefined) ? graph.min.toString() : ""
                     color: "green"
                     font.pointSize: 10
                     anchors.bottom: parent.bottom

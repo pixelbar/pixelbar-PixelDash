@@ -10,12 +10,12 @@ Canvas {
     property var strokeColor: "lime"
     property int maximumValues: 60
 
-    property real calculatedMin
-    property real calculatedMax
+    property var calculatedMin
+    property var calculatedMax
 
-    property real average
-    property real min: calculatedMin
-    property real max: calculatedMax
+    property var average
+    property var min: calculatedMin
+    property var max: calculatedMax
 
     property int validValues: 0
 
@@ -31,7 +31,7 @@ Canvas {
 
         var y_range = control.max - control.min;
 
-        if(x_range == 1 || y_range == 0) {
+        if(x_range == 1) {
             var y_pos = control.height / 2;
             ctx.beginPath();
             ctx.moveTo(0, y_pos);

@@ -7,7 +7,7 @@ class SpaceStateSensor(RESTSensor):
     def __init__(self):
         super().__init__()
         self._name = "Spacestate"
-        self._period = 10
+        self._interval = 10
         self._url = "https://spacestate.pixelbar.nl/spacestate.php"
 
         """

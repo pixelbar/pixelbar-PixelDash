@@ -8,8 +8,16 @@ class WeatherSensor(RESTSensor):
         super().__init__()
         self._name = "Weather"
 
-        self._period = 60
+        self._interval = 60
         self._url = "http://api.weatherapi.com/v1/current.json?key=48e0f38006264b9aa8d94019222606&q=Rotterdam&aqi=yes"
+
+        self._unitMap = {
+            "Temperature": "°C",
+            "Cloud": "%",
+            "Precipitation": "%",
+            "Wind": "km/h",
+            "PM2.5": "µg/m³"
+        }
 
         """
         Ëxample application/json response:

@@ -8,10 +8,14 @@ class JimSensor(RESTSensor):
     def __init__(self):
         super().__init__()
         self._name = "Upstairs thermometer (Jim)"
-        self._period = 30
+        self._interval = 30
         self._url = "http://172.30.31.190"
 
         self._re = re.compile(r"celciusTemp: ([\d\.]*)")
+
+        self._unitMap = {
+            "Temperature": "°C"
+        }
 
         """
         Ëxample text/plain response:
@@ -24,9 +28,9 @@ class JimSensor(RESTSensor):
 
     def processResponse(self, response: requests.Response) -> dict:
         values = {}
-        result = self._re.search(response.text)
-        if result:
-            values["Temperature"] = float(matches[0])
+        matches = self._re.search(response.text)
+        if matches:
+            values["Temperature"] = float(matches[1])
         else:
             values["Temperature"] = None
 
