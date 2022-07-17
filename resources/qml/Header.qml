@@ -20,10 +20,16 @@ Item {
         text: {
             switch(spaceOpen) {
                 case true:
+                    if (app != null)
+                        app.controllers.GPIO.emit({"docklight": true})
                     return "PixelBar is open"
                 case false:
+                    if (app != null)
+                        app.controllers.GPIO.emit({"docklight": false})
                     return "PixelBar is closed"
                 case undefined:
+                    if (app != null)
+                        app.controllers.GPIO.emit({"docklight": false})
                     return "SpaceState is undetermined"
             }
         }

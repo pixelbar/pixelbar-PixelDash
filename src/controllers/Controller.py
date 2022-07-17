@@ -4,16 +4,17 @@ from PySide2.QtCore import QObject, Slot
 class Controller(QObject):
     def __init__(self) -> None:
         super().__init__()
+        self._running = False
 
     def __del__(self):
         if self._running:
             self.stop()
 
     def start(self) -> None:
-        pass
+        self._running = True
 
     def stop(self) -> None:
-        pass
+        self._running = False
 
     @Slot("QVariantMap")
     def emit(self, values: dict) -> None:

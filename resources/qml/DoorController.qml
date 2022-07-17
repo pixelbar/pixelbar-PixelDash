@@ -26,12 +26,20 @@ Column {
             text: "Front door"
             checkable: true
             autoResetInterval: 2000
+            onCheckedChanged: {
+                if (app != null)
+                    app.controllers.GPIO.emit({"loadingdoor": checked})
+            }
         }
 
         PB.Button {
             text: "Pixelbar door"
             checkable: true
             autoResetInterval: 2000
+            onCheckedChanged: {
+                if (app != null)
+                    app.controllers.GPIO.emit({"pixeldoor": checked})
+            }
         }
     }
 }
