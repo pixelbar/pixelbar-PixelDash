@@ -8,10 +8,6 @@ Column {
     property alias linked: link.checked
     property alias channels: channelRepeater
 
-    onOnChanged: function() {
-        lightsController.publishValues()
-    }
-
     spacing: 10
 
     PB.Label
@@ -68,7 +64,7 @@ Column {
                     to: 255
                     enabled: power.checked
                     value: channelRepeater.values[modelData]
-                    onMoved: function() {
+                    onValueChanged: function() {
                         channelRepeater.channelValueChanged(modelData, value)
                     }
                 }
