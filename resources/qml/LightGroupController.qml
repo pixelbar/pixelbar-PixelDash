@@ -68,7 +68,7 @@ Column {
                     to: 255
                     enabled: power.checked
                     value: channelRepeater.values[modelData]
-                    onValueChanged: function() {
+                    onMoved: function() {
                         channelRepeater.channelValueChanged(modelData, value)
                     }
                 }
