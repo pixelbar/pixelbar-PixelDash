@@ -1,5 +1,4 @@
 PySide2
-flask
 requests
-pySerial
 psutil
+RPI.GPIO
