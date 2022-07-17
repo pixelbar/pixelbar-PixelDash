@@ -44,7 +44,8 @@ Column {
             if(JSON.stringify(newValues) != JSON.stringify(lightsController.values))
              {
                 lightsController.values = newValues
-                print(JSON.stringify(lightsController.values))
+                if(app != null)
+                    app.controllers.Lights.emit(lightsController.values)
             }
         }
 
