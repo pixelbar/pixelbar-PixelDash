@@ -8,6 +8,8 @@ Grid {
     columns: 3
     spacing: 20
 
+    property var groupNames: Object.keys(lightsController.values)
+
     ListModel {
         id: ledPresets
         Component.onCompleted: {
@@ -71,55 +73,37 @@ Grid {
     }
     function setRandomColor() {
         var newValues = {}
-        var groupNames = ["Door", "Stairs", "Beamer", "Kitchen"]
-        for(var i in groupNames) {
-            var groupColor = Qt.hsva(Math.random(), Math.random(), 1, 1)
-            newValues[groupNames[i]] = (groupColor.toString().substr(1, 6) + "00")
+        for(var groupName in presetsController.groupNames) {
+            var groupColor = Qt.hsva(Math.random(), Math.random(), 1, 0)
+            newValues[groupNames[groupName]] = groupColor.toString()
         }
         lightsController.setValues(newValues)
     }
 
     property color unicornColor: "black"
+
+    Component {
+        id: unicornAnimationStep
+        ColorAnimation {
+            property int index: 0
+            target: presetsController
+            property: "unicornColor"
+            duration: index == 0 ? 0 : unicornAnimation.duration
+            to: Qt.hsva((index / 6) % 1, 1, 1, 0)
+        }
+    }
+
     SequentialAnimation {
         id: unicornAnimation
         running: false
         loops: Animation.Infinite
         property var duration: 1000
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: 0
-            to: "red"
-        }
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: unicornAnimation.duration
-            to: "yellow"
-        }
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: unicornAnimation.duration
-            to: "green"
-        }
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: unicornAnimation.duration
-            to: "blue"
-        }
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: unicornAnimation.duration
-            to: "magenta"
-        }
-        ColorAnimation {
-            target:presetsController
-            property: "unicornColor"
-            duration: unicornAnimation.duration
-            to: "red"
+
+        Component.onCompleted: {
+            var animations = []
+            for(var i=0; i<7; i++)
+                animations.push(unicornAnimationStep.createObject(unicornAnimation, {index: i}))
+            unicornAnimation.animations = animations
         }
     }
 
