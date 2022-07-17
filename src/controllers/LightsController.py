@@ -7,6 +7,7 @@ from .Controller import Controller
 class LightsController(Controller):
     def __init__(self) -> None:
         super().__init__()
+        self._timeout = 0.25
         self._throttle_interval = 100
 
         self._url = "http://172.30.31.86:1234/api/v2"
@@ -25,6 +26,13 @@ class LightsController(Controller):
             return
 
         try:
-            result = requests.post(self._url, data=json.dumps(data), headers=self._headers)
+            result = requests.post(
+                self._url,
+                data=json.dumps(data),
+                headers=self._headers,
+                timeout=self._timeout,
+            )
+        except requests.exceptions.Timeout:
+            print("Timeout occured while sending data to light server")
         except Exception as e:
             print("Exception occured while sending data to light server: " + repr(e))
