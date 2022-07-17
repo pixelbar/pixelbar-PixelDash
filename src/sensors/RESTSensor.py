@@ -14,14 +14,14 @@ class RESTSensor(Sensor):
     def loopOnce(self) -> None:
         try:
             response = requests.get(self._url, timeout=self._timeout)
-            self.processResponse(response)
+            self._processResponse(response)
         except requests.exceptions.Timeout:
             # timeout occured
             self._state = 400
             self._values = {}
-        self.updateData()
+        self._updateData()
 
-    def processResponse(self, response: requests.Response) -> dict:
+    def _processResponse(self, response: requests.Response) -> dict:
         try:
             json_data = response.json()
         except requests.exceptions.JSONDecodeError:

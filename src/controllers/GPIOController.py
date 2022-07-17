@@ -27,7 +27,7 @@ class GPIOController(Controller):
             GPIO.setup(pin, GPIO.OUT)
             GPIO.output(pin, GPIO.HIGH)
 
-    def processValues(self, values: dict):
+    def _processValues(self, values: dict):
         for key, value in values.items():
             try:
                 GPIO.output(self._pin_map[key], GPIO.LOW if value else GPIO.HIGH)

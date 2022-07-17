@@ -51,7 +51,7 @@ class IKEASensor(RESTSensor):
         VINDRIKTNING PM 2.5 µm  7 µg/m³
         """
 
-    def processResponse(self, response: requests.Response) -> dict:
+    def _processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()
         values = response_json["StatusSNS"]["BME680"]
         values["PM2.5"] = response_json["StatusSNS"]["VINDRIKTNING"]["PM2.5"]

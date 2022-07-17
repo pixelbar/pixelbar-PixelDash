@@ -27,7 +27,7 @@ class RPITelemetrySensor(CommandLineSensor):
 
         """
 
-    def processResponse(self, response: subprocess.Popen) -> dict:
+    def _processResponse(self, response: subprocess.Popen) -> dict:
         values = {
             "CPU usage": psutil.cpu_percent(interval=0.25),
             "Memory usage": psutil.virtual_memory().percent,

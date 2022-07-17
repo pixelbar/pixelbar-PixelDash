@@ -38,12 +38,12 @@ class Sensor(QObject):
                 time.sleep(0.5)
 
     def loopOnce(self) -> None:
-        self.updateData()
+        self._updateData()
 
-    def processResponse(self) -> None:
+    def _processResponse(self) -> None:
         pass
 
-    def updateData(self) -> None:
+    def _updateData(self) -> None:
         self._timestamp = time.monotonic()
         self.dataChanged.emit()
 

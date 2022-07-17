@@ -12,7 +12,7 @@ class LightsController(Controller):
 
         self._group_order = ["Beamer", "Door", "Stairs", "Kitchen"]
 
-    def processValues(self, values: dict):
+    def _processValues(self, values: dict):
         data = {}
         try:
             data["colors"] = [values[key] for key in self._group_order]

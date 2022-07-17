@@ -30,7 +30,7 @@ class PimSensor(RESTSensor):
 
         """
 
-    def processResponse(self, response: requests.Response) -> dict:
+    def _processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()
         values = {"Temperature": float(response_json["AccelTemp"])}
 

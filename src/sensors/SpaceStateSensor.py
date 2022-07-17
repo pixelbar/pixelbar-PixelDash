@@ -19,7 +19,7 @@ class SpaceStateSensor(RESTSensor):
 
         """
 
-    def processResponse(self, response: requests.Response) -> dict:
+    def _processResponse(self, response: requests.Response) -> dict:
         response_json = response.json()
         values = {"open": response_json["state"] == "open"}
 

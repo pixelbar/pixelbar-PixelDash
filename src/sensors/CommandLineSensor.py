@@ -19,10 +19,10 @@ class CommandLineSensor(Sensor):
             stderr=subprocess.PIPE,
             close_fds=True,
         )
-        self.processResponse(response)
-        self.updateData()
+        self._processResponse(response)
+        self._updateData()
 
-    def processResponse(self, response: subprocess.Popen) -> dict:
+    def _processResponse(self, response: subprocess.Popen) -> dict:
         self._state = response.status_code
         # print(response.stderr.read())
         # print(response.stdout.read())

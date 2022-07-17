@@ -26,7 +26,7 @@ class JimSensor(RESTSensor):
 
         """
 
-    def processResponse(self, response: requests.Response) -> dict:
+    def _processResponse(self, response: requests.Response) -> dict:
         values = {}
         matches = self._re.search(response.text)
         if matches:

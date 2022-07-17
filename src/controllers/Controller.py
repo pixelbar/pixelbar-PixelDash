@@ -17,7 +17,7 @@ class Controller(QObject):
 
     @Slot("QVariantMap")
     def emit(self, values: dict) -> None:
-        self.processValues(values)
+        self._processValues(values)
 
-    def processValues(self, values: dict) -> None:
+    def _processValues(self, values: dict) -> None:
         pass
