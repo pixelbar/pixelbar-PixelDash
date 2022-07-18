@@ -10,8 +10,7 @@ class Sensor(QObject):
         self._name = "Untitled sensor"
         self._interval = 10
 
-        self._running = False
-        self._thread = threading.Thread(target=self.loopForEver)
+        self._thread = threading.Thread(target=self.loopForEver, daemon=True)
 
         self._state = 0
         self._timestamp = 0.0
@@ -19,22 +18,19 @@ class Sensor(QObject):
         self._unitMap = {}
 
     def __del__(self):
-        if self._running:
-            self.stop()
+        pass
 
     def start(self) -> None:
         self._thread.start()
 
     def stop(self) -> None:
-        self._running = False
-        self._thread.join()
+        pass
 
     def loopForEver(self) -> None:
-        self._running = True
-        while self._running:
+        while True:
             start_time = time.monotonic()
             self.loopOnce()
-            while self._running and time.monotonic() - start_time < self._interval:
+            while time.monotonic() - start_time < self._interval:
                 time.sleep(0.5)
 
     def loopOnce(self) -> None:
