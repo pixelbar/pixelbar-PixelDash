@@ -4,8 +4,9 @@ from .SensorManager import SensorManager
 from .EmitterManager import EmitterManager
 
 class PixelDash(QObject):
-    def __init__(self):
+    def __init__(self, debug):
         QObject.__init__(self)
+        self._debug = debug
         self._sensorManager = None
         self._emitterManager = None
 
@@ -14,6 +15,11 @@ class PixelDash(QObject):
             self._sensorManager.stop()
         if self._emitterManager:
             self._emitterManager.stop()
+
+    def debug(self) -> bool:
+        return self._debug
+
+    debug = Property(bool, fget=debug, constant=True)
 
     def sensors(self) -> SensorManager:
         if not self._sensorManager:

@@ -1,5 +1,6 @@
 import requests
 import json
+import logging
 
 from .Emitter import Emitter
 
@@ -20,7 +21,7 @@ class LightsEmitter(Emitter):
         try:
             data["colors"] = [values[key] for key in self._group_order]
         except KeyError:
-            print("Missing group in values: " + str(list(values.keys())))
+            logging.error("Missing group in values: " + str(list(values.keys())))
 
         if not data:
             return
@@ -33,6 +34,8 @@ class LightsEmitter(Emitter):
                 timeout=self._timeout,
             )
         except requests.exceptions.Timeout:
-            print("Timeout occured while sending data to light server")
+            logging.error("Timeout occured while sending data to light server")
         except Exception as e:
-            print("Exception occured while sending data to light server: " + repr(e))
+            logging.error(
+                "Exception occured while sending data to light server: " + repr(e)
+            )

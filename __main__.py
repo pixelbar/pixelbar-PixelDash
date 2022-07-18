@@ -1,12 +1,19 @@
 import sys
 import os
 import signal
+import logging
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
 from PySide2.QtCore import Qt
 
 from src.PixelDash import PixelDash
+
+DEBUG = True
+
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG if DEBUG else logging.INFO
+)
 
 # Unify default control looks across platforms
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion"
@@ -15,10 +22,10 @@ os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion"
 app = QGuiApplication(sys.argv)
 
 # Hide the cursor
-if False:
+if not DEBUG:
     app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
-pixelDash = PixelDash()
+pixelDash = PixelDash(debug = DEBUG)
 
 # Create QML engine
 engine = QQmlApplicationEngine()

@@ -7,7 +7,7 @@ import "PixelBar" as PB
 ApplicationWindow {
     id: window
     visible: true
-    //visibility: "FullScreen"
+    visibility: app != null ? (app.debug ? "AutomaticVisibility" : "FullScreen") : "AutomaticVisibility"
     width: 1920
     height: 1080
 
