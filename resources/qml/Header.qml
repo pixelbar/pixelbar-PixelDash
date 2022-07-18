@@ -22,11 +22,11 @@ Item {
                 case true:
                     if (app != null)
                         app.emitters.GPIO.push({"docklight": true})
-                    return "PixelBar is open"
+                    return "Pixelbar is open"
                 case false:
                     if (app != null)
                         app.emitters.GPIO.push({"docklight": false})
-                    return "PixelBar is closed"
+                    return "Pixelbar is closed"
                 case undefined:
                     if (app != null)
                         app.emitters.GPIO.push({"docklight": false})
