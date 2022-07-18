@@ -30,8 +30,9 @@ class Sensor(QObject):
         while True:
             start_time = time.monotonic()
             self.loopOnce()
-            while time.monotonic() - start_time < self._interval:
-                time.sleep(0.5)
+            time_left = self._interval - (time.monotonic() - start_time)
+            if time_left > 0:
+                time.sleep(time_left)
 
     def loopOnce(self) -> None:
         self._updateData()

@@ -9,7 +9,7 @@ class LightsEmitter(Emitter):
     def __init__(self) -> None:
         super().__init__()
         self._timeout = 0.25
-        self._throttle_interval = 100
+        self._interval = 0.1
 
         self._url = "http://172.30.31.86:1234/api/v2"
         self._headers = {"content-type": "application/json"}
