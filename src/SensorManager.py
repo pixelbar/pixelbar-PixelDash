@@ -1,11 +1,13 @@
+import logging
+
+from PySide2.QtCore import QObject, Property
+
 from .sensors.SpaceStateSensor import SpaceStateSensor
 from .sensors.WeatherSensor import WeatherSensor
 from .sensors.IKEASensor import IKEASensor
 from .sensors.JimSensor import JimSensor
 from .sensors.PimSensor import PimSensor
 from .sensors.RPITelemetrySensor import RPITelemetrySensor
-
-from PySide2.QtCore import QObject, Property
 
 
 class SensorManager(QObject):
@@ -15,11 +17,13 @@ class SensorManager(QObject):
 
     def stop(self):
         for className in self._sensors:
+            logging.info(f"Closing {className} sensor")
             self._sensors[className].stop()
 
     def getSensor(self, cls):
         className = cls.__name__
         if className not in self._sensors:
+            logging.info(f"Creating {className} sensor")
             self._sensors[className] = cls()
             self._sensors[className].start()
         return self._sensors[className]

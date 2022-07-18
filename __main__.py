@@ -14,6 +14,10 @@ DEBUG = True
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG if DEBUG else logging.INFO
 )
+if DEBUG:
+    logging.info("Starting PixelDash in debug mode")
+else:
+    logging.info("Starting PixelDash")
 
 # Unify default control looks across platforms
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion"

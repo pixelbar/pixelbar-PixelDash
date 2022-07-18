@@ -3,6 +3,7 @@ from PySide2.QtCore import QObject, Property
 from .SensorManager import SensorManager
 from .EmitterManager import EmitterManager
 
+
 class PixelDash(QObject):
     def __init__(self, debug):
         QObject.__init__(self)
