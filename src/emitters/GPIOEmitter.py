@@ -3,10 +3,10 @@ try:
 except ModuleNotFoundError:
     GPIO = None
 
-from .Controller import Controller
+from .Emitter import Emitter
 
 
-class GPIOController(Controller):
+class GPIOEmitter(Emitter):
     def __init__(self) -> None:
         super().__init__()
 

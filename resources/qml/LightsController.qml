@@ -45,7 +45,7 @@ Column {
              {
                 lightsController.values = newValues
                 if(app != null)
-                    app.controllers.Lights.emit(lightsController.values)
+                    app.emitters.Lights.push(lightsController.values)
             }
         }
 

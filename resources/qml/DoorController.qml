@@ -28,7 +28,7 @@ Column {
             autoResetInterval: 2000
             onCheckedChanged: {
                 if (app != null)
-                    app.controllers.GPIO.emit({"loadingdoor": checked})
+                    app.emitters.GPIO.push({"loadingdoor": checked})
             }
         }
 
@@ -38,7 +38,7 @@ Column {
             autoResetInterval: 2000
             onCheckedChanged: {
                 if (app != null)
-                    app.controllers.GPIO.emit({"pixeldoor": checked})
+                    app.emitters.GPIO.push({"pixeldoor": checked})
             }
         }
     }

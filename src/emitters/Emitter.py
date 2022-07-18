@@ -1,7 +1,7 @@
 from PySide2.QtCore import QObject, Slot, QTimer
 
 
-class Controller(QObject):
+class Emitter(QObject):
     def __init__(self) -> None:
         super().__init__()
         self._throttle_interval = 0
@@ -23,7 +23,7 @@ class Controller(QObject):
         pass
 
     @Slot("QVariantMap")
-    def emit(self, values: dict) -> None:
+    def push(self, values: dict) -> None:
         if self._throttle_interval == 0:
             self._processValues(values)
             return

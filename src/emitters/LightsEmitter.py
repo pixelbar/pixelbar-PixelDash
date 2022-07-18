@@ -1,10 +1,10 @@
 import requests
 import json
 
-from .Controller import Controller
+from .Emitter import Emitter
 
 
-class LightsController(Controller):
+class LightsEmitter(Emitter):
     def __init__(self) -> None:
         super().__init__()
         self._timeout = 0.25
