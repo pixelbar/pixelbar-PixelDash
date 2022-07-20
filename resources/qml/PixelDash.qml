@@ -46,11 +46,4 @@ ApplicationWindow {
             sensor: (app != null) ? app.sensors.Weather : null
         }
     }
-
-    GraphTestBlock {
-        anchors.left: parent.left
-        anchors.top: lightsController.bottom
-        anchors.margins: 25
-        anchors.topMargin: 75
-    }
 }
