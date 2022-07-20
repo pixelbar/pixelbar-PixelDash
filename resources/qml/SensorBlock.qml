@@ -53,7 +53,7 @@ Column {
                 text: modelData
                 anchors.verticalCenter: graph.verticalCenter
                 font.pointSize: 20
-                width: 180
+                width: 160
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
             }
@@ -78,6 +78,7 @@ Column {
             PB.SparkLine {
                 id: graph
                 height: nameLabel.height
+                width: 230
             }
 
             Item {
