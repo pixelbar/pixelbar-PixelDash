@@ -48,31 +48,38 @@ Column {
                 }
             }
 
-            PB.Label {
-                id: nameLabel
-                text: modelData
+            Item {
+                width: 300
+                height: childrenRect.height
                 anchors.verticalCenter: graph.verticalCenter
-                font.pointSize: 20
-                width: 160
-                elide: Text.ElideRight
-                horizontalAlignment: Text.AlignLeft
-            }
 
-            PB.Label {
-                id: valueLabel
-                text: "0"
-                anchors.verticalCenter: graph.verticalCenter
-                font.pointSize: 20
-                width: 100
-                horizontalAlignment: Text.AlignRight
-            }
+                PB.Label {
+                    id: nameLabel
+                    text: modelData
+                    font.pointSize: 20
+                    width: 160
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    anchors.left: parent.left
+                    anchors.right: valueLabel.left
+                    anchors.rightMargin: 25
+                }
 
-            PB.Label {
-                id: unitLabel
-                text: (sensor != null) ? sensor.unitMap[modelData] : ""
-                font.pointSize: 20
-                width: 75
-                horizontalAlignment: Text.AlignLeft
+                PB.Label {
+                    id: valueLabel
+                    text: "0"
+                    font.pointSize: 20
+                    anchors.right: unitLabel.left
+                    anchors.rightMargin: 15
+                }
+
+                PB.Label {
+                    id: unitLabel
+                    text: (sensor != null) ? sensor.unitMap[modelData] : ""
+                    font.pointSize: 20
+                    anchors.right: parent.right
+                }
+
             }
 
             PB.SparkLine {

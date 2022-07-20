@@ -41,10 +41,6 @@ ApplicationWindow {
         DoorController {}
 
         ClimateBlock {}
-
-        SensorBlock {
-            sensor: (app != null) ? app.sensors.Weather : null
-        }
     }
 
     SensorBlock {
@@ -52,17 +48,25 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.top: lightsController.bottom
         anchors.margins: 25
-        anchors.topMargin: 75
 
         sensor: (app != null) ? app.sensors.RPI : null
     }
 
     SensorBlock {
+        id: ikeaBlock
         anchors.left: rpiBlock.right
         anchors.top: lightsController.bottom
         anchors.margins: 25
-        anchors.topMargin: 75
 
         sensor: (app != null) ? app.sensors.IKEA : null
     }
+
+    SensorBlock {
+        anchors.left: ikeaBlock.right
+        anchors.top: lightsController.bottom
+        anchors.margins: 25
+
+        sensor: (app != null) ? app.sensors.Weather : null
+    }
+
 }
