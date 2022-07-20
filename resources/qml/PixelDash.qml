@@ -46,4 +46,23 @@ ApplicationWindow {
             sensor: (app != null) ? app.sensors.Weather : null
         }
     }
+
+    SensorBlock {
+        id: rpiBlock
+        anchors.left: parent.left
+        anchors.top: lightsController.bottom
+        anchors.margins: 25
+        anchors.topMargin: 75
+
+        sensor: (app != null) ? app.sensors.RPI : null
+    }
+
+    SensorBlock {
+        anchors.left: rpiBlock.right
+        anchors.top: lightsController.bottom
+        anchors.margins: 25
+        anchors.topMargin: 75
+
+        sensor: (app != null) ? app.sensors.IKEA : null
+    }
 }

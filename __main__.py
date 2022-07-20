@@ -9,7 +9,7 @@ from PySide2.QtCore import Qt
 
 from src.PixelDash import PixelDash
 
-DEBUG = True
+DEBUG = False
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG if DEBUG else logging.INFO
