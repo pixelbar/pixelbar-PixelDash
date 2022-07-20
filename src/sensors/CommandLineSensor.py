@@ -23,6 +23,6 @@ class CommandLineSensor(Sensor):
         self._updateData()
 
     def _processResponse(self, response: subprocess.Popen) -> dict:
-        self._state = response.status_code
+        self._state = response.returncode
         # print(response.stderr.read())
         # print(response.stdout.read())

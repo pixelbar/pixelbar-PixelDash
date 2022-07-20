@@ -12,7 +12,7 @@ class RPITelemetrySensor(CommandLineSensor):
         self._interval = 10
         self._command = "vcgencmd measure_temp"
 
-        self._re = re.compile(r"celciusTemp: ([\d\.]*)")
+        self._re = re.compile(r"temp=([\d\.]*)")
 
         self._unitMap = {
             "CPU usage": "%",
@@ -33,11 +33,12 @@ class RPITelemetrySensor(CommandLineSensor):
             "Memory usage": psutil.virtual_memory().percent,
         }
 
-        matches = self._re.search(response.stdout.read())
+        matches = self._re.search(response.stdout.read().decode())
         if matches:
             values["Temperature"] = float(matches[1])
+            self._state = 200
         else:
             values["Temperature"] = None
+            self._state = 404
 
-        self._state = response.status_code
         self._values = values
