@@ -36,7 +36,7 @@ engine = QQmlApplicationEngine()
 context = QQmlContext(engine.rootContext())
 
 engine.rootContext().setContextProperty("app", pixelDash)
-engine.load(os.path.join("resources", "qml", "PixelDash.qml"))
+engine.load(os.path.join(os.path.dirname(__file__), "resources", "qml", "PixelDash.qml"))
 
 # Catch CTRL+C and close the app when the window is closed
 signal.signal(signal.SIGINT, signal.SIG_DFL)
