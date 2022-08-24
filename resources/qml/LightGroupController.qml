@@ -24,17 +24,18 @@ Column {
         PB.Button {
             id: power
             anchors.left: parent.left
+            width: (parent.width - 10) / 2
+            checkable: true
             checked: true
             text: checked ? "On" : "Off"
-            checkable: true
-            width: (parent.width - 10) / 2
+            onClicked: lightsController.publishValues()
         }
         PB.Button {
             id: link
             anchors.right: parent.right
+            width: (parent.width - 10) / 2
             text: "Link"
             checkable: true
-            width: (parent.width - 10) / 2
         }
     }
     Row {
