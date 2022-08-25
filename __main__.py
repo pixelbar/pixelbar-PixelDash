@@ -12,7 +12,12 @@ from src.PixelDash import PixelDash
 DEBUG = False
 
 logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG if DEBUG else logging.INFO
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.DEBUG if DEBUG else logging.INFO,
+    handlers=[
+        logging.FileHandler("pixeldash.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 if DEBUG:
     logging.info("Starting PixelDash in debug mode")
@@ -29,14 +34,16 @@ app = QGuiApplication(sys.argv)
 if not DEBUG:
     app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
-pixelDash = PixelDash(debug = DEBUG)
+pixelDash = PixelDash(debug=DEBUG)
 
 # Create QML engine
 engine = QQmlApplicationEngine()
 context = QQmlContext(engine.rootContext())
 
 engine.rootContext().setContextProperty("app", pixelDash)
-engine.load(os.path.join(os.path.dirname(__file__), "resources", "qml", "PixelDash.qml"))
+engine.load(
+    os.path.join(os.path.dirname(__file__), "resources", "qml", "PixelDash.qml")
+)
 
 # Catch CTRL+C and close the app when the window is closed
 signal.signal(signal.SIGINT, signal.SIG_DFL)
