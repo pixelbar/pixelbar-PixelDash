@@ -31,7 +31,11 @@ class PimSensor(RESTSensor):
         """
 
     def _processResponse(self, response: requests.Response) -> dict:
-        response_json = response.json()
+        try:
+            response_json = response.json()
+        except requests.exceptions.JSONDecodeError:
+            self._state = 500
+            return
         values = {"Temperature": float(response_json["AccelTemp"])}
 
         self._state = response.status_code

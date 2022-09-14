@@ -10,7 +10,7 @@ class RESTSensor(Sensor):
         self._name = "Untitled REST sensor"
 
         self._url = ""
-        self._timeout = 1
+        self._timeout = 2
 
     def loopOnce(self) -> None:
         try:
@@ -21,7 +21,7 @@ class RESTSensor(Sensor):
         except requests.exceptions.Timeout:
             # timeout occured
             logging.error(f"Timeout occured while getting data from {self._url}")
-            self._state = 400
+            self._state = 408
             self._values = {}
         self._updateData()
 
