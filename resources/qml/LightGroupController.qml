@@ -25,6 +25,7 @@ Column {
             id: power
             anchors.left: parent.left
             width: (parent.width - 10) / 2
+            height: 35
             checkable: true
             checked: true
             text: checked ? "On" : "Off"
@@ -34,6 +35,7 @@ Column {
             id: link
             anchors.right: parent.right
             width: (parent.width - 10) / 2
+            height: 35
             text: "Link"
             checkable: true
         }
