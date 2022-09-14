@@ -17,7 +17,7 @@ Column {
 
     PB.Label
     {
-        text: "Climate"
+        text: "Temperature"
     }
 
     Row {
