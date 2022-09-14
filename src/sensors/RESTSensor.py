@@ -1,6 +1,11 @@
 import requests
 import logging
 
+try:
+    from simplejson.errors import JSONDecodeError
+except ImportError:
+    from json.decoder import JSONDecodeError
+
 from .Sensor import Sensor
 
 
@@ -28,7 +33,7 @@ class RESTSensor(Sensor):
     def _processResponse(self, response: requests.Response) -> dict:
         try:
             json_data = response.json()
-        except requests.exceptions.JSONDecodeError:
+        except JSONDecodeError:
             json_data = {"content": response.text}
 
         self._state = response.status_code

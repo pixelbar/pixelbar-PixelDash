@@ -2,6 +2,11 @@ from .RESTSensor import RESTSensor
 
 import requests
 
+try:
+    from simplejson.errors import JSONDecodeError
+except ImportError:
+    from json.decoder import JSONDecodeError
+
 
 class PimSensor(RESTSensor):
     def __init__(self):
@@ -33,7 +38,7 @@ class PimSensor(RESTSensor):
     def _processResponse(self, response: requests.Response) -> dict:
         try:
             response_json = response.json()
-        except requests.exceptions.JSONDecodeError:
+        except JSONDecodeError:
             self._state = 500
             return
         values = {"Temperature": float(response_json["AccelTemp"])}
