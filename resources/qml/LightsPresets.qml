@@ -73,9 +73,10 @@ Grid {
     }
     function setRandomColor() {
         var newValues = {}
-        for(var groupName in presetsController.groupNames) {
-            var groupColor = Qt.hsva(Math.random(), Math.random(), 1, 0)
-            newValues[groupNames[groupName]] = groupColor.toString()
+        for(var i in presetsController.groupNames) {
+            var groupColor = Qt.hsva(Math.random(), .5 + Math.random() / 2, 1, 0)
+            // convert #AARRGGBB to RRGGBBAA
+            newValues[groupNames[i]] = groupColor.toString().replace(/#(..)(......)/, '$2$1')
         }
         lightsController.setValues(newValues)
     }
@@ -115,8 +116,9 @@ Grid {
         var newValues = {}
         var groupNames = ["Door", "Stairs", "Beamer", "Kitchen"]
         for(var i in groupNames) {
-            var groupColor = Qt.hsva((hue + i / 6) % 1, saturation, value, 1)
-            newValues[groupNames[i]] = (groupColor.toString().substr(1, 6) + "00")
+            var groupColor = Qt.hsva((hue + i / 6) % 1, saturation, value, 0)
+            // convert #AARRGGBB to RRGGBBAA
+            newValues[groupNames[i]] = groupColor.toString().replace(/#(..)(......)/, '$2$1')
         }
         lightsController.setValues(newValues)
     }
