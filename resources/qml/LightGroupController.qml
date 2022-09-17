@@ -37,15 +37,19 @@ Column {
 
             Rectangle {
                 id: swatchRGB
-                width: parent.width / 2
-                height: parent.height
+                width: (parent.width / 2) - 1
+                height: parent.height - 2
+                x: 1
+                y: 1
             }
 
             Rectangle {
                 id: swatchW
-                width: parent.width / 2
-                height: parent.height
+                width: (parent.width / 2) - 1
+                height: parent.height - 2
                 anchors.right: parent.right
+                anchors.rightMargin: 1
+                y: 1
             }
 
             Connections {
@@ -65,7 +69,7 @@ Column {
             id: power
             anchors.left: parent.left
             width: (parent.width - 10) / 2
-            height: 35
+            height: 40
             checkable: true
             checked: true
             text: checked ? "On" : "Off"
@@ -75,7 +79,7 @@ Column {
             id: link
             anchors.right: parent.right
             width: (parent.width - 10) / 2
-            height: 35
+            height: 40
             text: "Link"
             checkable: true
         }
