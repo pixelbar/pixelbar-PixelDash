@@ -10,12 +10,51 @@ Column {
 
     spacing: 10
 
-    PB.Label
-    {
-        text: modelData
-        font.pointSize: 30
-        horizontalAlignment: Text.AlignHCenter
+    Item {
         width: parent.width
+        height: groupName.height
+        PB.Label
+        {
+            id: groupName
+            text: modelData
+            font.pointSize: 30
+            horizontalAlignment: Text.AlignLeft
+            anchors.right: swatch.left
+            anchors.left: parent.left
+        }
+
+        Rectangle
+        {
+            id: swatch
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            height: 0.5 * parent.height
+            width: height
+            color: "transparent"
+            border.width: 1
+            border.color: "green"
+
+            Rectangle {
+                id: swatchRGB
+                width: parent.width / 2
+                height: parent.height
+            }
+
+            Rectangle {
+                id: swatchW
+                width: parent.width / 2
+                height: parent.height
+                anchors.right: parent.right
+            }
+
+            Connections {
+                target: channels
+                function onChannelValuesChanged() {
+                    swatchRGB.color = Qt.rgba(channels.values["R"] / 255, channels.values["G"] / 255, channels.values["B"] / 255, 1)
+                    swatchW.opacity = channels.values["W"] / 255
+                }
+            }
+        }
     }
 
     Item {
@@ -48,10 +87,12 @@ Column {
             id: channelRepeater
             property var values: {"R": 0, "G": 0, "B": 0, "W": 0}
             property string changedChannel: ""
+            signal channelValuesChanged
 
             function channelValueChanged(channel, value) {
                 changedChannel = channel
                 channelRepeater.values[channel] = value
+                channelRepeater.channelValuesChanged()
 
                 groupRepeater.colorChanged(modelData)
             }
