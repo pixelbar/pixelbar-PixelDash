@@ -46,6 +46,7 @@ GridLayout {
             }
             onClicked: {
                 if (name=="Unicorn") {
+                    transitionAnimation.stop()
                     randomAnimation.stop()
                     if(unicornAnimation.running) {
                         unicornAnimation.stop()
@@ -53,6 +54,7 @@ GridLayout {
                         unicornAnimation.restart()
                     }
                 } else if (name=="Random") {
+                    transitionAnimation.stop()
                     unicornAnimation.stop()
                     if(randomAnimation.running) {
                         randomAnimation.stop()
@@ -63,12 +65,64 @@ GridLayout {
                 } else {
                     unicornAnimation.stop()
                     randomAnimation.stop()
-                    lightsController.setValues(model.values)
+                    transitionAnimation.startTransition(lightsController.values, model.values)
                 }
             }
         }
     }
 
+    /* Preset transition */
+    NumberAnimation {
+        id: transitionAnimation
+        from: 0
+        to: 1
+        duration: 500
+
+        target: transitionAnimation
+        property: "progress"
+
+        property real progress: 0
+        property var fromDecimalValues
+        property var toDecimalValues
+
+        onProgressChanged: function() {
+            var newValues = {}
+            var groupNames = presetsController.groupNames
+            for(var i in groupNames) {
+                var fromDecimalColor = fromDecimalValues[i]
+                var toDecimalColor = toDecimalValues[i]
+                var newColor = ""
+                for(var c = 0; c < 4; c++) {
+                    newColor += Math.floor(
+                        toDecimalColor[c] * progress +
+                        fromDecimalColor[c] * (1 - progress)
+                    ).toString(16).padStart(2, "0")
+                }
+                newValues[groupNames[i]] = newColor
+            }
+            lightsController.setValues(newValues)
+        }
+
+        function startTransition(fromValues, toValues) {
+            var newFromDecimalValues = {}
+            var newToDecimalValues = {}
+            var groupNames = presetsController.groupNames
+            for(var i in groupNames) {
+                newFromDecimalValues[i] = []
+                newToDecimalValues[i] = []
+                for(var c = 0; c < 4; c++) {
+                    newFromDecimalValues[i].push(parseInt(fromValues[groupNames[i]].substr(c*2, 2), 16))
+                    newToDecimalValues[i].push(parseInt(toValues[groupNames[i]].substr(c*2, 2), 16))
+                }
+            }
+            fromDecimalValues = newFromDecimalValues
+            toDecimalValues = newToDecimalValues
+            transitionAnimation.start()
+        }
+    }
+
+
+    /* Random color animation */
     Timer {
         id: randomAnimation
         interval: 1000
@@ -79,7 +133,8 @@ GridLayout {
     }
     function setRandomColor() {
         var newValues = {}
-        for(var i in presetsController.groupNames) {
+        var groupNames = presetsController.groupNames
+        for(var i in groupNames) {
             var groupColor = Qt.hsva(Math.random(), .5 + Math.random() / 2, 1, 0)
             // convert #AARRGGBB to RRGGBBAA
             newValues[groupNames[i]] = groupColor.toString().replace(/#(..)(......)/, '$2$1')
@@ -87,6 +142,7 @@ GridLayout {
         lightsController.setValues(newValues)
     }
 
+    /* Unicorn color animation */
     property color unicornColor: "black"
 
     Component {
@@ -120,7 +176,7 @@ GridLayout {
         var value = unicornColor.hsvValue
 
         var newValues = {}
-        var groupNames = ["Door", "Stairs", "Beamer", "Kitchen"]
+        var groupNames = presetsController.groupNames
         for(var i in groupNames) {
             var groupColor = Qt.hsva((hue + i / 6) % 1, saturation, value, 0)
             // convert #AARRGGBB to RRGGBBAA
