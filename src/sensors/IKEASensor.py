@@ -6,7 +6,7 @@ import requests
 class IKEASensor(RESTSensor):
     def __init__(self):
         super().__init__()
-        self._name = "IKEA air quality"
+        self._name = "Air Quality"
 
         self._interval = 30
         self._url = "http://172.30.31.116/cm?cmnd=STATUS%2010"
