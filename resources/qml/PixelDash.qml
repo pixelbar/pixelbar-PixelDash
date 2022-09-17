@@ -48,6 +48,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.top: lightsController.bottom
         anchors.margins: 25
+        width: Math.floor((lightsController.width + 75) / 2) - 25
 
         sensor: (app != null) ? app.sensors.RPI : null
     }
@@ -57,6 +58,7 @@ ApplicationWindow {
         anchors.left: rpiBlock.right
         anchors.top: lightsController.bottom
         anchors.margins: 25
+        width: Math.floor((lightsController.width + 75) / 2) - 25
 
         sensor: (app != null) ? app.sensors.IKEA : null
     }

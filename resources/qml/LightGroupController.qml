@@ -33,6 +33,7 @@ Column {
             color: "transparent"
             border.width: 1
             border.color: "green"
+            visible: power.checked
 
             Rectangle {
                 id: swatchRGB

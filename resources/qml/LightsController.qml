@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import "PixelBar" as PB
 
 Column {
-    spacing: 20
+    spacing: 15
 
     PB.Label
     {

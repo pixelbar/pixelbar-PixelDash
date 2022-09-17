@@ -26,6 +26,7 @@ else:
 
 # Unify default control looks across platforms
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion"
+os.environ["QT_FONT_DPI"] = "96"
 
 # Create an instance of the application
 app = QGuiApplication(sys.argv)
