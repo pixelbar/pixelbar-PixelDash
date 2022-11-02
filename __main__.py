@@ -17,7 +17,7 @@ logging.basicConfig(
     handlers=[
         logging.handlers.RotatingFileHandler(
             "logs/pixeldash.log",
-            maxBytes=2000,
+            maxBytes=2000000,
             backupCount=10
         ),
         logging.StreamHandler(sys.stdout)
