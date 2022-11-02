@@ -1,7 +1,7 @@
 import sys
 import os
 import signal
-import logging
+import logging, logging.handlers
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
@@ -15,7 +15,11 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     level=logging.DEBUG if DEBUG else logging.INFO,
     handlers=[
-        logging.FileHandler("pixeldash.log"),
+        logging.handlers.RotatingFileHandler(
+            "logs/pixeldash.log",
+            maxBytes=2000,
+            backupCount=10
+        ),
         logging.StreamHandler(sys.stdout)
     ]
 )
