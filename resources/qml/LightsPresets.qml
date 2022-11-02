@@ -16,8 +16,8 @@ GridLayout {
         id: ledPresets
         Component.onCompleted: {
             append({"name": "Bright",     "values": {"Door":"ffffffff", "Stairs":"ffffffff", "Beamer":"ffffffff", "Kitchen":"ffffffff"}})
-            append({"name": "Pim",        "values": {"Door":"ff3300ff", "Stairs":"ff3300ff", "Beamer":"ff3300ff", "Kitchen":"ff3300ff"}})
-            append({"name": "Popcorn",    "values": {"Door":"ff3300ff", "Stairs":"7f19007f", "Beamer":"00000000", "Kitchen":"7f19007f"}})
+            append({"name": "Pim",        "values": {"Door":"ffaa55ff", "Stairs":"ffaa55ff", "Beamer":"ffaa55ff", "Kitchen":"ffaa55ff"}})
+            append({"name": "Popcorn",    "values": {"Door":"ffaa55ff", "Stairs":"7f55297f", "Beamer":"00000000", "Kitchen":"7f55297f"}})
             append({"name": "Sunset",     "values": {"Door":"89B3D900", "Stairs":"F2905700", "Beamer":"F2E52E00", "Kitchen":"F2B74900"}})
 
             append({"name": "Courtisane", "values": {"Door":"ff000000", "Stairs":"ff000000", "Beamer":"ff000000", "Kitchen":"ff000000"}})
