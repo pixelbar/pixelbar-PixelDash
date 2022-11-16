@@ -28,8 +28,6 @@ Item {
                         app.emitters.GPIO.push({"docklight": false})
                     return "Pixelbar is closed"
                 case undefined:
-                    if (app != null)
-                        app.emitters.GPIO.push({"docklight": false})
                     return "SpaceState is undetermined"
             }
         }
