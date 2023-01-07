@@ -68,7 +68,7 @@ ApplicationWindow {
         anchors.top: lightsController.bottom
         anchors.margins: 25
 
-        sensor: (app != null) ? app.sensors.Weather : null
+        sensor: (app != null) ? app.sensors.Tasmota2 : null
     }
 
 }
