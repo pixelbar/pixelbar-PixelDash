@@ -25,43 +25,56 @@ Column {
         width: parent.width
         spacing: 40
 
-        Column {
+        ListView {
             id: temperatureValues
             spacing: 15
             width: 250
+            height: childrenRect.height
 
-            Repeater
-            {
-                model: temperatures
-                delegate: Item {
-                    height: childrenRect.height
-                    width: temperatureValues.width
-                    PB.Label {
-                        id: label
-                        anchors.left: parent.left
-                        anchors.right: value.left
-                        anchors.rightMargin: 10
-                        text: modelData.label
-                        elide: Text.ElideRight
-                        font.pointSize: 20
-                        horizontalAlignment: Text.AlignLeft
-                    }
-                    PB.Label {
-                        id: value
-                        anchors.right: unit.left
-                        anchors.rightMargin: 10
-                        font.pointSize: 20
-                        horizontalAlignment: Text.AlignLeft
+            model: temperatures
+            delegate: Item {
+                height: childrenRect.height
+                width: temperatureValues.width
+                PB.Label {
+                    id: label
+                    anchors.left: parent.left
+                    anchors.right: value.left
+                    anchors.rightMargin: 10
+                    text: modelData.label
+                    elide: Text.ElideRight
+                    font.pointSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                }
+                PB.Label {
+                    id: value
+                    anchors.right: unit.left
+                    anchors.rightMargin: 10
+                    font.pointSize: 20
+                    horizontalAlignment: Text.AlignLeft
 
-                        text: (modelData.sensor.values["Temperature"] != undefined) ? modelData.sensor.values["Temperature"] : "??"
+                    text: (modelData.sensor.values["Temperature"] != undefined) ? modelData.sensor.values["Temperature"] : "??"
+                    onTextChanged: {
+                        delaySortTimer.restart()
                     }
-                    PB.Label {
-                        id: unit
-                        anchors.right: parent.right
-                        text: "°C"
-                        font.pointSize: 20
-                        horizontalAlignment: Text.AlignLeft
-                    }
+                }
+                PB.Label {
+                    id: unit
+                    anchors.right: parent.right
+                    text: "°C"
+                    font.pointSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+
+            Timer {
+                id: delaySortTimer
+                running: false
+                repeat: false
+
+                interval: 500
+                onTriggered: {
+                    temperatures.sort(function(a, b){return b.sensor.values["Temperature"] - a.sensor.values["Temperature"]})
+                    temperatureValues.model = temperatures
                 }
             }
         }
@@ -76,7 +89,7 @@ Column {
 
             Repeater
             {
-                model: temperatures
+                model: [...temperatures] // create a copy of the original array so were not bothered by the sorting
                 delegate: PB.SparkLine {
                     width: temperatureGraphs.width
                     height: temperatureGraphs.height
