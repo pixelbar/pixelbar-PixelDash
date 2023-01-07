@@ -5,6 +5,7 @@ from PySide2.QtCore import QObject, Property
 from .sensors.SpaceStateSensor import SpaceStateSensor
 from .sensors.WeatherSensor import WeatherSensor
 from .sensors.IKEASensor import IKEASensor
+from .sensors.Tasmota2Sensor import Tasmota2Sensor
 from .sensors.JimSensor import JimSensor
 from .sensors.PimSensor import PimSensor
 from .sensors.RPITelemetrySensor import RPITelemetrySensor
@@ -42,6 +43,11 @@ class SensorManager(QObject):
         return self.getSensor(IKEASensor)
 
     IKEA = Property(QObject, fget=IKEA, constant=True)
+
+    def Tasmota2(self) -> Tasmota2Sensor:
+        return self.getSensor(Tasmota2Sensor)
+
+    Tasmota2 = Property(QObject, fget=Tasmota2, constant=True)
 
     def Jim(self) -> JimSensor:
         return self.getSensor(JimSensor)

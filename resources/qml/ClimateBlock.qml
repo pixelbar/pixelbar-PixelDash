@@ -12,6 +12,7 @@ Column {
         {"label":"Table",    "sensor":app.sensors.IKEA},
         {"label":"Kitchen",  "sensor":app.sensors.Pim},
         {"label":"Upstairs", "sensor":app.sensors.Jim},
+        {"label":"Couches",  "sensor":app.sensors.Tasmota2},
         {"label":"Outside",  "sensor":app.sensors.Weather},
     ] : []
 
@@ -53,15 +54,6 @@ Column {
                         horizontalAlignment: Text.AlignLeft
 
                         text: (modelData.sensor.values["Temperature"] != undefined) ? modelData.sensor.values["Temperature"] : "??"
-                        onTextChanged: function(text) {
-                            /*
-                            print(text)
-                            if(text != "??")
-                                temperatureGraphs.children[index].addValue(parseFloat(text))
-                            else
-                                temperatureGraphs.children[index].addValue(undefined)
-                                */
-                        }
                     }
                     PB.Label {
                         id: unit
