@@ -30,6 +30,7 @@ Column {
             spacing: 15
             width: 250
             height: childrenRect.height
+            interactive: false
 
             model: temperatures
             delegate: Item {
