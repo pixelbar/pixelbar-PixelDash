@@ -4,6 +4,7 @@ from PySide2.QtCore import QObject, Property
 
 from .emitters.LightsEmitter import LightsEmitter
 from .emitters.GPIOEmitter import GPIOEmitter
+from .emitters.VCGenCmdEmitter import VCGenCmdEmitter
 
 
 class EmitterManager(QObject):
@@ -33,3 +34,8 @@ class EmitterManager(QObject):
         return self.getSensor(GPIOEmitter)
 
     GPIO = Property(QObject, fget=GPIO, constant=True)
+
+    def VCGenCmd(self) -> VCGenCmdEmitter:
+        return self.getSensor(VCGenCmdEmitter)
+
+    VCGenCmd = Property(QObject, fget=VCGenCmd, constant=True)

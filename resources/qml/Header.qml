@@ -21,11 +21,17 @@ Item {
             switch(spaceOpen) {
                 case true:
                     if (app != null)
+                    {
                         app.emitters.GPIO.push({"docklight": true})
+                        app.emitters.VCGenCmd.push({"display_power": 1})
+                    }
                     return "Pixelbar is open"
                 case false:
                     if (app != null)
+                    {
                         app.emitters.GPIO.push({"docklight": false})
+                        app.emitters.VCGenCmd.push({"display_power": 0})
+                    }
                     return "Pixelbar is closed"
                 case undefined:
                     return "SpaceState is undetermined"
