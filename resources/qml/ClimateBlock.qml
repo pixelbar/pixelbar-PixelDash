@@ -89,7 +89,7 @@ Column {
 
         Item {
             id: temperatureGraphs
-            width: 340
+            width: 300
             height: temperatureValues.height
 
             property var min: undefined

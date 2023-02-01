@@ -45,16 +45,14 @@ ApplicationWindow {
 
         ScrollView {
             width: parent.width
-            clip: true
+            contentWidth: -1
 
             anchors.top: doorController.bottom
-            anchors.topMargin: 75
+            anchors.topMargin: 50
             anchors.bottom: parent.bottom
 
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-            ScrollBar.horizontal.interactive: false
-            ScrollBar.vertical.interactive: true
+            clip: true
 
             Column {
                 spacing: 50
@@ -65,12 +63,12 @@ ApplicationWindow {
                 }
 
                 SensorBlock {
-                    sensor: (app != null) ? app.sensors.IKEA : null
+                    sensor: (app != null) ? app.sensors.Tasmota2 : null
                     width: climateBlock.width
                 }
 
                 SensorBlock {
-                    sensor: (app != null) ? app.sensors.Tasmota2 : null
+                    sensor: (app != null) ? app.sensors.IKEA : null
                     width: climateBlock.width
                 }
             }
