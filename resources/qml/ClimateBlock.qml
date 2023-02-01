@@ -74,7 +74,14 @@ Column {
 
                 interval: 500
                 onTriggered: {
-                    temperatures.sort(function(a, b){return b.sensor.values["Temperature"] - a.sensor.values["Temperature"]})
+                    temperatures.sort(function(a, b) {
+                        let a_value = parseFloat(a.sensor.values["Temperature"]);
+                        if (isNaN(a_value)) a_value = -273;
+                        let b_value = parseFloat(b.sensor.values["Temperature"]);
+                        if (isNaN(b_value)) b_value = -273;
+
+                        return b_value - a_value;
+                    })
                     temperatureValues.model = temperatures
                 }
             }
