@@ -1,9 +1,8 @@
-from .CommandLineSensor import CommandLineSensor
-
 import psutil
 import re
 import subprocess
 
+from .command_line_sensor import CommandLineSensor
 
 class RPITelemetrySensor(CommandLineSensor):
     def __init__(self):
@@ -14,14 +13,14 @@ class RPITelemetrySensor(CommandLineSensor):
 
         self._re = re.compile(r"temp=([\d\.]*)")
 
-        self._unitMap = {
+        self._unit_map = {
             "CPU usage": "%",
             "Memory usage": "%",
             "Temperature": "°C"
         }
 
         """
-        Ëxample text/plain response:
+        Example text/plain response:
 
         temp=42.8'C
 

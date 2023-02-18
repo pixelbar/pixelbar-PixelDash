@@ -1,7 +1,6 @@
-from .RESTSensor import RESTSensor
-
 import requests
 
+from .rest_sensor import RESTSensor
 
 class SpaceStateSensor(RESTSensor):
     def __init__(self):
@@ -11,7 +10,7 @@ class SpaceStateSensor(RESTSensor):
         self._url = "https://spacestate.pixelbar.nl/spacestate.php"
 
         """
-        Ëxample application/json response:
+        Example application/json response:
 
         {
             "state": "closed"

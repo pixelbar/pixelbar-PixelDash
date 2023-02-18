@@ -1,7 +1,7 @@
 import logging
 import subprocess
 
-from .Emitter import Emitter
+from .emitter import Emitter
 
 
 class VCGenCmdEmitter(Emitter):
@@ -17,7 +17,7 @@ class VCGenCmdEmitter(Emitter):
     def _processValues(self, values: dict):
         for key, value in values.items():
             if key not in self._legal_commands:
-                logging.error(f"Tried to execute unknown vcgencmd: {key}")
+                logging.error("Tried to execute unknown vcgencmd: %s", key)
                 continue
 
             response = subprocess.Popen(
@@ -28,4 +28,3 @@ class VCGenCmdEmitter(Emitter):
                 stderr=subprocess.PIPE,
                 close_fds=True,
             )
-

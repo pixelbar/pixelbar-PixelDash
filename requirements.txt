@@ -1,4 +1,4 @@
 PySide2
 requests
 psutil
-RPI.GPIO
+RPI.GPIO; sys_platform == 'linux'

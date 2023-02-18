@@ -15,7 +15,7 @@ class Sensor(QObject):
         self._state = 0
         self._timestamp = 0.0
         self._values = {}
-        self._unitMap = {}
+        self._unit_map = {}
 
     def __del__(self):
         pass
@@ -42,24 +42,24 @@ class Sensor(QObject):
 
     def _updateData(self) -> None:
         self._timestamp = time.monotonic()
-        self.dataChanged.emit()
+        self.data_changed.emit()
 
-    dataChanged = Signal()
+    data_changed = Signal()
 
     def state(self) -> int:
         return self._state
 
-    state = Property(int, fget=state, notify=dataChanged)
+    state = Property(int, fget=state, notify=data_changed)
 
     def timestamp(self) -> float:
         return self._timestamp
 
-    timestamp = Property(float, fget=timestamp, notify=dataChanged)
+    timestamp = Property(float, fget=timestamp, notify=data_changed)
 
     def values(self) -> dict:
         return self._values
 
-    values = Property("QVariantMap", fget=values, notify=dataChanged)
+    values = Property("QVariantMap", fget=values, notify=data_changed)
 
     def name(self) -> str:
         return self._name
@@ -77,6 +77,6 @@ class Sensor(QObject):
     interval = Property(float, fget=interval, fset=setInterval, notify=intervalChanged)
 
     def unitMap(self) -> dict:
-        return self._unitMap
+        return self._unit_map
 
     unitMap = Property("QVariantMap", fget=unitMap, constant=True)

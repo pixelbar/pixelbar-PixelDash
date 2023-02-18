@@ -5,7 +5,7 @@ try:
 except ModuleNotFoundError:
     GPIO = None
 
-from .Emitter import Emitter
+from .emitter import Emitter
 
 
 class GPIOEmitter(Emitter):
@@ -34,7 +34,7 @@ class GPIOEmitter(Emitter):
             try:
                 GPIO.output(self._pin_map[key], GPIO.LOW if value else GPIO.HIGH)
             except KeyError:
-                logging.error(f"Tried to set unknown pin name: {key}")
+                logging.error("Tried to set unknown pin name: %s", key)
             except AttributeError:
-                # GPIO is not avaialble
+                # GPIO is not available
                 pass

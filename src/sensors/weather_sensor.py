@@ -1,6 +1,6 @@
-from .RESTSensor import RESTSensor
-
 import requests
+
+from .rest_sensor import RESTSensor
 
 
 class WeatherSensor(RESTSensor):
@@ -11,7 +11,7 @@ class WeatherSensor(RESTSensor):
         self._interval = 60
         self._url = "http://api.weatherapi.com/v1/current.json?key=48e0f38006264b9aa8d94019222606&q=Rotterdam&aqi=yes"
 
-        self._unitMap = {
+        self._unit_map = {
             "Temperature": "°C",
             "Cloud": "%",
             "Precipitation": "%",
@@ -20,7 +20,7 @@ class WeatherSensor(RESTSensor):
         }
 
         """
-        Ëxample application/json response:
+        Example application/json response:
 
         {
             "location": {
@@ -73,7 +73,6 @@ class WeatherSensor(RESTSensor):
                 }
             }
         }
-
         """
 
     def _processResponse(self, response: requests.Response) -> dict:
