@@ -12,7 +12,7 @@ class LightsEmitter(Emitter):
         self._timeout = 1
         self._interval = 0.1
 
-        self._url = "http://172.30.31.86:1234/api/v2"
+        self._url = "http://172.30.11.19:1234/api/v2"
         self._headers = {"content-type": "application/json"}
 
         self._group_order = ["Beamer", "Door", "Stairs", "Kitchen"]

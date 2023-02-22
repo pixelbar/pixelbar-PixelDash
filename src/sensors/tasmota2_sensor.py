@@ -9,7 +9,7 @@ class Tasmota2Sensor(RESTSensor):
         self._name = "Climate (upstairs)"
 
         self._interval = 30
-        self._url = "http://172.30.31.97/cm?cmnd=STATUS%2010"
+        self._url = "http://172.30.101.224/cm?cmnd=STATUS%2010"
 
         self._unit_map = {
             "Temperature": "°C",

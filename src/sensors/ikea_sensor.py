@@ -8,7 +8,7 @@ class IKEASensor(RESTSensor):
         self._name = "Climate (downstairs)"
 
         self._interval = 30
-        self._url = "http://172.30.31.116/cm?cmnd=STATUS%2010"
+        self._url = "http://172.30.101.221/cm?cmnd=STATUS%2010"
 
         self._unit_map = {
             "Temperature": "°C",

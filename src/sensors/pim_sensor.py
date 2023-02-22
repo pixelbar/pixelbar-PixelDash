@@ -13,7 +13,7 @@ class PimSensor(RESTSensor):
         super().__init__()
         self._name = "Kitchen thermometer (Pim)"
         self._interval = 30
-        self._url = "http://172.30.31.86:8080/temp.json"
+        self._url = "http://172.30.11.19:8080/temp.json"
 
         self._unit_map = {
             "Temperature": "°C"
