@@ -13,7 +13,7 @@ from src.pixel_dash import PixelDash
 
 DEBUG = True
 LOG_PATH = Path('logs/pixeldash.log').absolute()
-PIXELDASH_START_SCREEN = Path('resources/qml/PixelDash.qml').absolute()
+PIXELDASH_UI_FILE = Path('resources/qml/PixelDash.qml').absolute()
 
 if not LOG_PATH.parent.exists():
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -54,7 +54,7 @@ engine = QQmlApplicationEngine()
 context = QQmlContext(engine.rootContext())
 
 engine.rootContext().setContextProperty("app", pixel_dash)
-engine.load(PIXELDASH_START_SCREEN)
+engine.load(str(PIXELDASH_UI_FILE))
 
 # Catch CTRL+C and close the app when the window is closed
 signal.signal(signal.SIGINT, signal.SIG_DFL)
