@@ -11,7 +11,7 @@ from PySide2.QtCore import Qt
 
 from src.pixel_dash import PixelDash
 
-DEBUG = True
+DEBUG = False
 LOG_PATH = Path('logs/pixeldash.log').absolute()
 PIXELDASH_UI_FILE = Path('resources/qml/PixelDash.qml').absolute()
 
