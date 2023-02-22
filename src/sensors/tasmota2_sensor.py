@@ -1,6 +1,6 @@
-from .RESTSensor import RESTSensor
-
 import requests
+
+from .rest_sensor import RESTSensor
 
 
 class Tasmota2Sensor(RESTSensor):
@@ -11,7 +11,7 @@ class Tasmota2Sensor(RESTSensor):
         self._interval = 30
         self._url = "http://172.30.31.97/cm?cmnd=STATUS%2010"
 
-        self._unitMap = {
+        self._unit_map = {
             "Temperature": "°C",
             "Humidity": "%",
             "DewPoint": "°C",
@@ -19,7 +19,7 @@ class Tasmota2Sensor(RESTSensor):
         }
 
         """
-        Ëxample application/json response:
+        Example application/json response:
 
         {
             "StatusSNS": {

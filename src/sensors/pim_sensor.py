@@ -1,6 +1,6 @@
-from .RESTSensor import RESTSensor
-
 import requests
+
+from .rest_sensor import RESTSensor
 
 try:
     from simplejson.errors import JSONDecodeError
@@ -15,12 +15,12 @@ class PimSensor(RESTSensor):
         self._interval = 30
         self._url = "http://172.30.31.86:8080/temp.json"
 
-        self._unitMap = {
+        self._unit_map = {
             "Temperature": "°C"
         }
 
         """
-        Ëxample application/json response:
+        Example application/json response:
 
         {
             "AccelTemp": "24.39",

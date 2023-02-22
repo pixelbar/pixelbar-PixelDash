@@ -1,6 +1,6 @@
 import subprocess
 
-from .Sensor import Sensor
+from .sensor import Sensor
 
 
 class CommandLineSensor(Sensor):

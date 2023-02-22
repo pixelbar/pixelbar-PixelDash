@@ -1,8 +1,7 @@
-from .RESTSensor import RESTSensor
-
-import requests
 import re
+import requests
 
+from .rest_sensor import RESTSensor
 
 class JimSensor(RESTSensor):
     def __init__(self):
@@ -13,12 +12,12 @@ class JimSensor(RESTSensor):
 
         self._re = re.compile(r"celciusTemp: ([\d\.]*)")
 
-        self._unitMap = {
+        self._unit_map = {
             "Temperature": "°C"
         }
 
         """
-        Ëxample text/plain response:
+        Example text/plain response:
 
         # HELP home_sensor_temperature_celcius Home temperature sensor reading
         # TYPE home_sensor_temperature_celcius gauge

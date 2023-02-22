@@ -1,12 +1,12 @@
-import requests
 import logging
+import requests
 
 try:
     from simplejson.errors import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
 
-from .Sensor import Sensor
+from .sensor import Sensor
 
 
 class RESTSensor(Sensor):
@@ -21,16 +21,16 @@ class RESTSensor(Sensor):
         try:
             response = requests.get(self._url, timeout=self._timeout)
             if response.status_code != 200:
-                logging.warning(f"{self._url} return HTTP response {response.status_code}")
+                logging.warning("%s return HTTP response %s", self._url, response.status_code)
             self._processResponse(response)
         except requests.exceptions.Timeout:
-            # timeout occured
-            logging.error(f"Timeout occured while getting data from {self._url}")
+            # timeout occurred
+            logging.error("Timeout occurred while getting data from %s", self._url)
             self._state = 408
             self._values = {}
         except requests.exceptions.ConnectionError as e:
             # General connection error
-            logging.error(f"Connection error occured while getting data from {self._url}")
+            logging.error("Connection error occurred while getting data from %s", self._url)
             print(e)
             self._state = 500
             self._values = {}

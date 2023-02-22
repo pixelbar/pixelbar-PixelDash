@@ -1,28 +1,36 @@
 import sys
 import os
 import signal
-import logging, logging.handlers
+import logging
+import logging.handlers
+from pathlib import Path
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
 from PySide2.QtCore import Qt
 
-from src.PixelDash import PixelDash
+from src.pixel_dash import PixelDash
 
-DEBUG = False
+DEBUG = True
+LOG_PATH = Path('logs/pixeldash.log').absolute()
+PIXELDASH_START_SCREEN = Path('resources/qml/PixelDash.qml').absolute()
+
+if not LOG_PATH.parent.exists():
+    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     level=logging.DEBUG if DEBUG else logging.INFO,
     handlers=[
         logging.handlers.RotatingFileHandler(
-            "logs/pixeldash.log",
+            LOG_PATH,
             maxBytes=2000000,
             backupCount=10
         ),
         logging.StreamHandler(sys.stdout)
     ]
 )
+
 if DEBUG:
     logging.info("Starting PixelDash in debug mode")
 else:
@@ -39,21 +47,19 @@ app = QGuiApplication(sys.argv)
 if not DEBUG:
     app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
-pixelDash = PixelDash(debug=DEBUG)
+pixel_dash = PixelDash(debug=DEBUG)
 
 # Create QML engine
 engine = QQmlApplicationEngine()
 context = QQmlContext(engine.rootContext())
 
-engine.rootContext().setContextProperty("app", pixelDash)
-engine.load(
-    os.path.join(os.path.dirname(__file__), "resources", "qml", "PixelDash.qml")
-)
+engine.rootContext().setContextProperty("app", pixel_dash)
+engine.load(PIXELDASH_START_SCREEN)
 
 # Catch CTRL+C and close the app when the window is closed
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 engine.quit.connect(app.quit)
 
 result = app.exec_()
-pixelDash.stop()
+pixel_dash.stop()
 sys.exit(result)
