@@ -1,4 +1,6 @@
 PySide2
 requests
 psutil
-RPI.GPIO; sys_platform == 'linux'
+simplejson
+# We're attempting to restrict (as much as possible) the install to a Raspberry Pi system. This is not a perfect check!
+RPI.GPIO; sys_platform == 'linux' and platform_machine == 'armv6l' or platform_machine == 'armv7l' or platform_machine == 'armv8l' or platform_machine == 'aarch64'
