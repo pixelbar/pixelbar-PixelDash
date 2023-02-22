@@ -4,7 +4,7 @@ from PySide2.QtCore import QObject, Property
 
 from .emitters.lights_emitter import LightsEmitter
 from .emitters.gpio_emitter import GPIOEmitter
-from .emitters.vc_gen_cmd_emitter import VCGenCmdEmitter
+from .emitters.vcgencmd_emitter import VCGenCmdEmitter
 
 
 class EmitterManager(QObject):

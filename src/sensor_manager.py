@@ -2,7 +2,7 @@ import logging
 
 from PySide2.QtCore import QObject, Property
 
-from .sensors.space_state_sensor import SpaceStateSensor
+from .sensors.spacestate_sensor import SpaceStateSensor
 from .sensors.weather_sensor import WeatherSensor
 from .sensors.ikea_sensor import IKEASensor
 from .sensors.tasmota2_sensor import Tasmota2Sensor
