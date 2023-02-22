@@ -12,8 +12,10 @@ from PySide2.QtCore import Qt
 from src.pixel_dash import PixelDash
 
 DEBUG = False
-LOG_PATH = Path('logs/pixeldash.log').absolute()
-PIXELDASH_UI_FILE = Path('resources/qml/PixelDash.qml').absolute()
+LOG_PATH = (Path(__file__).parent / Path("logs/pixeldash.log")).absolute()
+PIXELDASH_UI_FILE = (
+    Path(__file__).parent / Path("resources/qml/PixelDash.qml")
+).absolute()
 
 if not LOG_PATH.parent.exists():
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
