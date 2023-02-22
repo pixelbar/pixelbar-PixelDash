@@ -42,24 +42,24 @@ class Sensor(QObject):
 
     def _updateData(self) -> None:
         self._timestamp = time.monotonic()
-        self.data_changed.emit()
+        self.dataChanged.emit()
 
-    data_changed = Signal()
+    dataChanged = Signal()
 
     def state(self) -> int:
         return self._state
 
-    state = Property(int, fget=state, notify=data_changed)
+    state = Property(int, fget=state, notify=dataChanged)
 
     def timestamp(self) -> float:
         return self._timestamp
 
-    timestamp = Property(float, fget=timestamp, notify=data_changed)
+    timestamp = Property(float, fget=timestamp, notify=dataChanged)
 
     def values(self) -> dict:
         return self._values
 
-    values = Property("QVariantMap", fget=values, notify=data_changed)
+    values = Property("QVariantMap", fget=values, notify=dataChanged)
 
     def name(self) -> str:
         return self._name
