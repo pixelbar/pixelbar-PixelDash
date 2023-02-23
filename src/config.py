@@ -63,4 +63,4 @@ class WeatherConfig:
     This class represents the configuration of the Weather Sensor Object
     """
     def __init__(self, config: dict[str, Any]) -> None:
-        self.api_key = config["api"]
+        self.api_key = config["api_key"]

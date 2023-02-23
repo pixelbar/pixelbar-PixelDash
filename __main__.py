@@ -18,8 +18,17 @@ except ImportError:
 
 
 from src.pixel_dash import PixelDash
+from src.config import Config
+
+
+def parse_config(config_path: Path) -> Config:
+    with open('config/pixeldash.toml', 'rb') as file_handle:
+        return Config(tomllib.load(file_handle))
+
 
 def main(args: Namespace):
+    config = parse_config(args.config)
+    
     DEBUG = False
     LOG_PATH = (Path(__file__).parent / Path("logs/pixeldash.log")).absolute()
     PIXELDASH_UI_FILE = (
