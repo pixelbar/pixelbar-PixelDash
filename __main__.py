@@ -28,22 +28,21 @@ def parse_config(config_path: Path) -> Config:
 
 def main(args: Namespace):
     config = parse_config(args.config)
-    
-    DEBUG = False
-    LOG_PATH = (Path(__file__).parent / Path("logs/pixeldash.log")).absolute()
-    PIXELDASH_UI_FILE = (
+
+    log_path = (Path(__file__).parent / Path(config.log_path)).absolute()
+    pixeldash_ui_file = (
         Path(__file__).parent / Path("resources/qml/PixelDash.qml")
     ).absolute()
 
-    if not LOG_PATH.parent.exists():
-        LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    if not log_path.parent.exists():
+        log_path.parent.mkdir(parents=True, exist_ok=True)
 
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(message)s",
-        level=logging.DEBUG if DEBUG else logging.INFO,
+        level=logging.DEBUG if config.debug else logging.INFO,
         handlers=[
             logging.handlers.RotatingFileHandler(
-                LOG_PATH,
+                log_path,
                 maxBytes=2000000,
                 backupCount=10
             ),
@@ -51,7 +50,7 @@ def main(args: Namespace):
         ]
     )
 
-    if DEBUG:
+    if config.debug:
         logging.info("Starting PixelDash in debug mode")
     else:
         logging.info("Starting PixelDash")
@@ -64,17 +63,17 @@ def main(args: Namespace):
     app = QGuiApplication(sys.argv)
 
     # Hide the cursor
-    if not DEBUG:
+    if not config.debug:
         app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
-    pixel_dash = PixelDash(debug=DEBUG)
+    pixel_dash = PixelDash(debug=config.debug)
 
     # Create QML engine
     engine = QQmlApplicationEngine()
     context = QQmlContext(engine.rootContext())
 
     engine.rootContext().setContextProperty("app", pixel_dash)
-    engine.load(str(PIXELDASH_UI_FILE))
+    engine.load(str(pixeldash_ui_file))
 
     # Catch CTRL+C and close the app when the window is closed
     signal.signal(signal.SIGINT, signal.SIG_DFL)
