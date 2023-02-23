@@ -1,0 +1,18 @@
+[pixeldash]
+debug = true
+log_path = "logs/pixeldash.log"
+
+[ikea]
+url = "http://172.30.31.116"
+
+[jim]
+url = "http://172.30.31.190"
+
+[pim]
+url = "http://172.30.31.86:8080"
+
+[tasmota2]
+url = "http://172.30.31.97"
+
+[weather]
+api_key = ""
