@@ -1,4 +1,7 @@
-from PySide2.QtCore import QObject, Property
+try:
+    from PySide2.QtCore import QObject, Property
+except ImportError:
+    from PySide6.QtCore import QObject, Property
 
 from .sensor_manager import SensorManager
 from .emitter_manager import EmitterManager

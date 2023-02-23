@@ -1,6 +1,9 @@
 import logging
 
-from PySide2.QtCore import QObject, Property
+try:
+    from PySide2.QtCore import QObject, Property
+except ImportError:
+    from PySide6.QtCore import QObject, Property
 
 from .sensors.spacestate_sensor import SpaceStateSensor
 from .sensors.weather_sensor import WeatherSensor

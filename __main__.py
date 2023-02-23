@@ -5,9 +5,15 @@ import logging
 import logging.handlers
 from pathlib import Path
 
-from PySide2.QtGui import QGuiApplication
-from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
-from PySide2.QtCore import Qt
+try:
+    from PySide2.QtGui import QGuiApplication
+    from PySide2.QtQml import QQmlApplicationEngine, QQmlContext
+    from PySide2.QtCore import Qt
+except ImportError:
+    from PySide6.QtGui import QGuiApplication
+    from PySide6.QtQml import QQmlApplicationEngine, QQmlContext
+    from PySide6.QtCore import Qt
+
 
 from src.pixel_dash import PixelDash
 

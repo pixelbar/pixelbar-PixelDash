@@ -1,7 +1,10 @@
 import threading
 import time
 
-from PySide2.QtCore import QObject, Signal, Property
+try:
+    from PySide2.QtCore import QObject, Signal, Property
+except ImportError:
+    from PySide6.QtCore import QObject, Signal, Property
 
 
 class Sensor(QObject):

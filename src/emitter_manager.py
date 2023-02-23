@@ -1,6 +1,9 @@
 import logging
 
-from PySide2.QtCore import QObject, Property
+try:
+    from PySide2.QtCore import QObject, Property
+except ImportError:
+    from PySide6.QtCore import QObject, Property
 
 from .emitters.lights_emitter import LightsEmitter
 from .emitters.gpio_emitter import GPIOEmitter

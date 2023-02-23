@@ -1,7 +1,10 @@
 import threading
 import time
 
-from PySide2.QtCore import QObject, Signal, Property, Slot
+try:
+    from PySide2.QtCore import QObject, Signal, Property, Slot
+except ImportError:
+    from PySide6.QtCore import QObject, Signal, Property, Slot
 
 
 class Emitter(QObject):
