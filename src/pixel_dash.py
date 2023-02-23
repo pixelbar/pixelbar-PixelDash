@@ -8,9 +8,10 @@ from .emitter_manager import EmitterManager
 
 
 class PixelDash(QObject):
-    def __init__(self, debug):
+    def __init__(self, config):
         QObject.__init__(self)
-        self._debug = debug
+        self._config = config
+        self._debug = config.debug
         self._sensor_manager = None
         self._emitter_manager = None
 

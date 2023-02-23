@@ -66,7 +66,7 @@ def main(args: Namespace):
     if not config.debug:
         app.setOverrideCursor(Qt.CursorShape.BlankCursor)
 
-    pixel_dash = PixelDash(debug=config.debug)
+    pixel_dash = PixelDash(config)
 
     # Create QML engine
     engine = QQmlApplicationEngine()
