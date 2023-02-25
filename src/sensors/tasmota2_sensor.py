@@ -4,12 +4,13 @@ from .rest_sensor import RESTSensor
 
 
 class Tasmota2Sensor(RESTSensor):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
         self._name = "Climate (upstairs)"
+        self._config = config
 
         self._interval = 30
-        self._url = "http://172.30.101.224/cm?cmnd=STATUS%2010"
+        self._url = f"{self._config.url}/cm?cmnd=STATUS%2010"
 
         self._unit_map = {
             "Temperature": "°C",

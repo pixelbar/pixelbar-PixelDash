@@ -3,12 +3,13 @@ import requests
 from .rest_sensor import RESTSensor
 
 class IKEASensor(RESTSensor):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
         self._name = "Climate (downstairs)"
+        self._config = config
 
         self._interval = 30
-        self._url = "http://172.30.101.221/cm?cmnd=STATUS%2010"
+        self._url = f"{self._config.url}/cm?cmnd=STATUS%2010"
 
         self._unit_map = {
             "Temperature": "°C",

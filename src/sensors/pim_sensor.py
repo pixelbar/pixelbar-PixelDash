@@ -9,11 +9,12 @@ except ImportError:
 
 
 class PimSensor(RESTSensor):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
         self._name = "Kitchen thermometer (Pim)"
         self._interval = 30
-        self._url = "http://172.30.11.19:8080/temp.json"
+        self._config = config
+        self._url = f"{self._config.url}/temp.json"
 
         self._unit_map = {
             "Temperature": "°C"

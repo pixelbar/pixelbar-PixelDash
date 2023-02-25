@@ -4,12 +4,13 @@ from .rest_sensor import RESTSensor
 
 
 class WeatherSensor(RESTSensor):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
         self._name = "Weather"
+        self._config = config
 
         self._interval = 60
-        self._url = "http://api.weatherapi.com/v1/current.json?key=48e0f38006264b9aa8d94019222606&q=Rotterdam&aqi=yes"
+        self._url = f"http://api.weatherapi.com/v1/current.json?key={config.api_key}&q=Rotterdam&aqi=yes"
 
         self._unit_map = {
             "Temperature": "°C",

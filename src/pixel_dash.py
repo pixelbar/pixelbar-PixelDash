@@ -28,7 +28,7 @@ class PixelDash(QObject):
 
     def sensors(self) -> SensorManager:
         if not self._sensor_manager:
-            self._sensor_manager = SensorManager()
+            self._sensor_manager = SensorManager(self._config)
         return self._sensor_manager
 
     sensors = Property(QObject, fget=sensors, constant=True)

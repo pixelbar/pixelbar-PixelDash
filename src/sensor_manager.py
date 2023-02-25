@@ -15,9 +15,10 @@ from .sensors.rpi_telemetry_sensor import RPITelemetrySensor
 
 
 class SensorManager(QObject):
-    def __init__(self):
+    def __init__(self, config):
         QObject.__init__(self)
         self._sensors = {}
+        self._config = config
 
     def stop(self):
         for name, sensor_class in self._sensors.items():
@@ -28,7 +29,11 @@ class SensorManager(QObject):
         name = cls.__name__
         if name not in self._sensors:
             logging.info("Creating %s sensor", name)
-            self._sensors[name] = cls()
+            # if we have a config for this class, pass it in
+            if self._config.config_for(name) is not None:
+                self._sensors[name] = cls(self._config.config_for(name))
+            else:
+                self._sensors[name] = cls()
             self._sensors[name].start()
         return self._sensors[name]
 

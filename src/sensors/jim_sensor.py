@@ -4,11 +4,12 @@ import requests
 from .rest_sensor import RESTSensor
 
 class JimSensor(RESTSensor):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
         self._name = "Upstairs thermometer (Jim)"
         self._interval = 30
-        self._url = "http://172.30.31.190"
+        self._config = config
+        self._url = self._config.url
 
         self._re = re.compile(r"celciusTemp: ([\d\.]*)")
 
