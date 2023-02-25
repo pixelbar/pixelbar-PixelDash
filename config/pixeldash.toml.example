@@ -1,18 +1,21 @@
+# This config is ingested by pixeldash and used to configure the entire application.
+# If you add a new table, you _must_ update the config.py to deserialize it into the Config object
+
 [pixeldash]
 debug = true
 log_path = "logs/pixeldash.log"
 
-[ikea]
+[IKEASensor]
 url = "http://172.30.31.116"
 
-[jim]
+[JimSensor]
 url = "http://172.30.31.190"
 
-[pim]
+[PimSensor]
 url = "http://172.30.31.86:8080"
 
-[tasmota2]
+[Tasmota2Sensor]
 url = "http://172.30.31.97"
 
-[weather]
+[WeatherSensor]
 api_key = ""

@@ -6,24 +6,20 @@ class Config:
     """
     def __init__(self, config: dict[str, Any]) -> None:
         # TODO: When TOML decides on a schema format, we should validate the config here
-        self.pixeldash = PixelDashConfig(config["pixeldash"])
-        self.debug = self.pixeldash.debug
-        self.log_path = self.pixeldash.log_path
+        self.debug = config["pixeldash"]["debug"]
+        self.log_path = config["pixeldash"]["log_path"]
 
-        self.ikea = IKEAConfig(config["ikea"])
-        self.jim = JimConfig(config["jim"])
-        self.pim = PimConfig(config["pim"])
-        self.tasmota2 = Tasmota2Config(config["tasmota2"])
-        self.weather = WeatherConfig(config["weather"])
+        self._configs = {
+            "IKEASensor": IKEAConfig(config["IKEASensor"]),
+            "JimSensor": JimConfig(config["JimSensor"]),
+            "PimSensor": PimConfig(config["PimSensor"]),
+            "Tasmota2Sensor": Tasmota2Config(config["Tasmota2Sensor"]),
+            "WeatherSensor": WeatherConfig(config["WeatherSensor"]),
+        }
 
 
-class PixelDashConfig:
-    """
-    This class represents the configuration of the general PixelDash project
-    """
-    def __init__(self, config: dict[str, Any]) -> None:
-        self.debug = config["debug"]
-        self.log_path = config["log_path"]
+    def config_for(self, name: str):
+        return self._configs.get(name)
 
 
 class IKEAConfig:
