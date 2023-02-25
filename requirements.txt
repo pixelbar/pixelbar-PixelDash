@@ -3,5 +3,6 @@ PySide6; sys_platform == 'darwin' and platform_machine == 'arm64'
 requests
 psutil
 simplejson
+tomli; python_version < "3.11"
 # We're attempting to restrict (as much as possible) the install to a Raspberry Pi system. This is not a perfect check!
 RPI.GPIO; sys_platform == 'linux' and platform_machine == 'armv6l' or platform_machine == 'armv7l' or platform_machine == 'armv8l' or platform_machine == 'aarch64'
