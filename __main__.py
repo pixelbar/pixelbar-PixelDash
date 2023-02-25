@@ -22,7 +22,7 @@ from src.config import Config
 
 
 def parse_config(config_path: Path) -> Config:
-    with open('config/pixeldash.toml', 'rb') as file_handle:
+    with open(config_path, 'rb') as file_handle:
         return Config(tomllib.load(file_handle))
 
 
