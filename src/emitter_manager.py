@@ -1,41 +1,55 @@
 import logging
+import sys
+import types
 
-from PySide2.QtCore import QObject, Property
+from PySide2.QtQml import QQmlPropertyMap
 
-from .emitters.lights_emitter import LightsEmitter
-from .emitters.gpio_emitter import GPIOEmitter
-from .emitters.vcgencmd_emitter import VCGenCmdEmitter
+from .emitters import *
 
 
-class EmitterManager(QObject):
+class EmitterManager(QQmlPropertyMap):
     def __init__(self):
-        QObject.__init__(self)
-        self._emitters = {}
+        QQmlPropertyMap.__init__(self)
+
+        # get a list of imported emitter modules
+        module_dict = sys.modules["src.emitters"].__dict__
+        emitter_modules = [
+            module_obj
+            for _, module_obj in module_dict.items()
+            if (
+                isinstance(module_obj, types.ModuleType)
+                and module_obj.__name__.startswith("src.emitters")
+            )
+        ]
+
+        for emitter_module in emitter_modules:
+            # get the classes defined in the module
+            classes = [
+                emitter_obj
+                for (_, emitter_obj) in emitter_module.__dict__.items()
+                if (
+                    isinstance(emitter_obj, type)
+                    and emitter_obj.__module__ == emitter_module.__name__
+                )
+            ]
+            if not classes:
+                continue
+            emitter_class = classes[0]
+
+            # filter out super classes that should not be used on their own
+            class_name = emitter_class.__name__[:-7]
+            if class_name in [""]:
+                continue
+
+            logging.info("Creating %s emitter", class_name)
+            emitter_instance = emitter_class()
+            emitter_instance.start()
+
+            self.insert(class_name, emitter_instance)
 
     def stop(self):
-        for name, emitter_class in self._emitters.items():
-            logging.info("Closing %s emitter", name)
-            emitter_class.stop()
-
-    def getSensor(self, cls):
-        class_name = cls.__name__
-        if class_name not in self._emitters:
-            logging.info("Creating %s emitter", class_name)
-            self._emitters[class_name] = cls()
-            self._emitters[class_name].start()
-        return self._emitters[class_name]
-
-    def Lights(self) -> LightsEmitter:
-        return self.getSensor(LightsEmitter)
-
-    Lights = Property(QObject, fget=Lights, constant=True)
-
-    def GPIO(self) -> GPIOEmitter:
-        return self.getSensor(GPIOEmitter)
-
-    GPIO = Property(QObject, fget=GPIO, constant=True)
-
-    def VCGenCmd(self) -> VCGenCmdEmitter:
-        return self.getSensor(VCGenCmdEmitter)
-
-    VCGenCmd = Property(QObject, fget=VCGenCmd, constant=True)
+        for key in self.keys():
+            logging.info("Closing %s emitter", key)
+            print(self.value(key))
+            self.value(key).stop()
+            self.clear(key)
