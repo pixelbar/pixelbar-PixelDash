@@ -82,7 +82,7 @@ ApplicationWindow {
         anchors.margins: 25
         width: Math.floor((lightsController.width + 75) / 2) - 25
 
-        sensor: (app != null) ? app.sensors.RPI : null
+        sensor: (app != null) ? app.sensors.RPITelemetry : null
     }
 
     SensorBlock {
