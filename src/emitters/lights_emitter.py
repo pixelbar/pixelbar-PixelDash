@@ -7,12 +7,13 @@ from .emitter import Emitter
 
 
 class LightsEmitter(Emitter):
-    def __init__(self) -> None:
+    def __init__(self, config) -> None:
         super().__init__()
         self._timeout = 1
         self._interval = 0.1
+        self._config = config
 
-        self._url = "http://172.30.11.19:1234/api/v2"
+        self._url = "{0}/api/v2".format(self._config["url"])
         self._headers = {"content-type": "application/json"}
 
         self._group_order = ["Beamer", "Door", "Stairs", "Kitchen"]

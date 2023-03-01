@@ -35,7 +35,7 @@ class PixelDash(QObject):
 
     def emitters(self) -> EmitterManager:
         if not self._emitter_manager:
-            self._emitter_manager = EmitterManager()
+            self._emitter_manager = EmitterManager(self._config)
         return self._emitter_manager
 
     emitters = Property(QObject, fget=emitters, constant=True)

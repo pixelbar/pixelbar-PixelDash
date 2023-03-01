@@ -9,15 +9,10 @@ from .emitter import Emitter
 
 
 class GPIOEmitter(Emitter):
-    def __init__(self) -> None:
+    def __init__(self, config) -> None:
         super().__init__()
-
-        self._pin_map = {
-            "loadingdoor": 22,
-            "pixeldoor": 23,
-            "docklight": 24,
-            "unused": 25,
-        }
+        self._config = config
+        self._pin_map = config["pin_map"]
 
         if not GPIO:
             return

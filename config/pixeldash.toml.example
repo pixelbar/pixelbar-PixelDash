@@ -20,3 +20,12 @@ url = "http://172.30.31.97"
 
 [WeatherSensor]
 api_key = ""
+
+[GPIOEmitter.pin_map]
+loadingdoor = 22
+pixeldoor = 23
+docklight = 24
+unused = 25
+
+[LightsEmitter]
+url = "http://172.30.11.19:1234"
