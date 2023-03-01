@@ -14,7 +14,7 @@ class PimSensor(RESTSensor):
         self._name = "Kitchen thermometer (Pim)"
         self._interval = 30
         self._config = config
-        self._url = f"{self._config.url}/temp.json"
+        self._url = "{0}/temp.json".format(self._config["url"])
 
         self._unit_map = {
             "Temperature": "°C"

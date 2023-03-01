@@ -30,8 +30,9 @@ class SensorManager(QObject):
         if name not in self._sensors:
             logging.info("Creating %s sensor", name)
             # if we have a config for this class, pass it in
-            if self._config.config_for(name) is not None:
-                self._sensors[name] = cls(self._config.config_for(name))
+            config = self._config.config_for(name)
+            if config is not None:
+                self._sensors[name] = cls(config)
             else:
                 self._sensors[name] = cls()
             self._sensors[name].start()

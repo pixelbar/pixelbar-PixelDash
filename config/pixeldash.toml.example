@@ -1,5 +1,6 @@
 # This config is ingested by pixeldash and used to configure the entire application.
-# If you add a new table, you _must_ update the config.py to deserialize it into the Config object
+# To add a new table, you should use the same name as the class you're looking to configure
+# Call config_for with the class name to get the appropriate table back.
 
 [pixeldash]
 debug = true

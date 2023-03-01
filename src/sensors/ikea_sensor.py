@@ -9,7 +9,7 @@ class IKEASensor(RESTSensor):
         self._config = config
 
         self._interval = 30
-        self._url = f"{self._config.url}/cm?cmnd=STATUS%2010"
+        self._url = "{0}/cm?cmnd=STATUS%2010".format(self._config["url"])
 
         self._unit_map = {
             "Temperature": "°C",

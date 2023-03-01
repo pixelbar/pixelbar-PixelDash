@@ -9,7 +9,7 @@ class JimSensor(RESTSensor):
         self._name = "Upstairs thermometer (Jim)"
         self._interval = 30
         self._config = config
-        self._url = self._config.url
+        self._url = self._config["url"]
 
         self._re = re.compile(r"celciusTemp: ([\d\.]*)")
 
