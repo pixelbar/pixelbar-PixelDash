@@ -10,8 +10,8 @@ class WeatherSensor(RESTSensor):
         self._config = config
 
         self._interval = 60
-        self.api_key = self._config["api_key"]
-        self._url = f"http://api.weatherapi.com/v1/current.json?key={self.api_key}&q=Rotterdam&aqi=yes"
+        api_key = self._config["api_key"]
+        self._url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q=Rotterdam&aqi=yes"
 
         self._unit_map = {
             "Temperature": "°C",
