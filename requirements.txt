@@ -1,4 +1,4 @@
-PySide2; sys_platform != 'darwin' and platform_machine != 'aarch64'
+PySide2; sys_platform != 'darwin' and platform_machine != 'arm64'
 PySide6; sys_platform == 'darwin' and platform_machine == 'arm64'
 requests
 psutil
