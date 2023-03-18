@@ -95,7 +95,7 @@ if __name__ == '__main__':
         '-c',
         '--config',
         dest='config',
-        default='config/pixeldash.toml',
+        default=Path(Path(__file__).parent, 'config/pixeldash.toml').absolute(),
         type=lambda p: Path(p).absolute(),
         help='Folder to config file. Defaults to config/pixeldash.toml'
     )
