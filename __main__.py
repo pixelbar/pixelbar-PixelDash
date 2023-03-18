@@ -4,7 +4,10 @@ import signal
 import logging
 import logging.handlers
 from pathlib import Path
-import tomllib
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
 from argparse import ArgumentParser, Namespace
 
 try:
